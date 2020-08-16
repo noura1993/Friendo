@@ -195,12 +195,18 @@ git checkout -d branch_name
 
 ## Merging
 
-1. Checkout the parent branch and pull:
+0. Commit & Push last changes on child_branch:
+```
+gaa
+gcmsg "Last changes"
+git push origin child_branch
+```
+1. Checkout the parent_branch and pull:
 ```
 git checkout parent_branch
 git pull origin parent_branch
 ```
-2. Go back to child branch and pull:
+2. Go back to child_branch and pull:
 ```
 git checkout child_branch
 git pull origin child_branch
