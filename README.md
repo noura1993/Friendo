@@ -214,6 +214,9 @@ git pull origin child_branch
 3. From child_branch, merge with parent_branch:
 ```
 git merge parent_branch
+```
+If any changes noticed, follow with:
+```
 gaa
 gcmsg "Merged with parent_branch"
 git push origin child_branch
@@ -229,6 +232,27 @@ git merge child_branch
 gaa
 gcmsg "Merged with child_branch"
 git push origin parent_branch
+```
+
+## Delete Commits
+
+1. Delete the most recent commit, keeping the work you've done:
+
+```
+git reset --soft HEAD~1
+```
+2. Delete the most recent commit, **destroying** the work you've done:
+
+```
+git reset --hard HEAD~1
+```
+
+## Change default editor
+
+Change computer's default editor for VSCode:
+
+```
+git config --global core.editor "code --wait"
 ```
 
 
