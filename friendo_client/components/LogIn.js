@@ -14,13 +14,12 @@ class LogIn extends Component {
 
     render() {
         return (
-             <View style={styles.container}>
-        <Form 
-          ref={c => this._form = c}
-          type={User} 
-        />
-
-      </View>
+          <View style={styles.container}>
+            <Form 
+              ref={c => this._form = c}
+              type={User} 
+            />
+          </View>
         )
     }
 }
@@ -29,8 +28,7 @@ const styles = StyleSheet.create({
     container: {
       justifyContent: 'center',
       marginTop: 50,
-      padding: 20,
-      backgroundColor: '#ffffff',
+      padding: 20
     },
   });
 
