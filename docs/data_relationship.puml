@@ -1,0 +1,118 @@
+@startuml
+
+'''''''''''''
+'  Styling  '
+'''''''''''''
+
+' Theme configuration ===========================================
+!if (%not(%variable_exists("$font")))
+!$font = "Helvetica"
+!endif
+
+' Global skinparams =========================================
+skinparam BackgroundColor White 
+skinparam Shadowing false
+skinparam lineType ortho
+hide empty members
+hide circle
+
+skinparam Default {
+  FontName $font
+  FontColor Black
+}
+
+skinparam Diagram {
+  BorderColor Black
+}
+
+skinparam Arrow {
+  Color Black
+  FontColor Black
+  FontStyle Italic
+}
+
+skinparam Package {
+  FontColor Black
+  BackgroundColor White
+  BorderColor Black
+}
+
+' Usecase ===============================================
+skinparam Usecase {
+  BackgroundColor White
+  BorderColor Black
+  FontColor Black
+}
+
+skinparam Actor {
+  BackgroundColor White
+  BorderColor Black
+  FontColor Black
+}
+
+' Class ===============================================
+skinparam CircledCharacter {
+  FontName $font
+  FontColor Black
+  FontSize 12
+  Radius 8
+}
+
+skinparam Class {
+  BackgroundColor White
+  BorderColor Black
+  FontColor Black
+  FontStyle Bold
+  hide circle
+
+  Attribute {
+    FontColor Black
+    IconSize 0
+  }
+}
+
+
+'''''''''''''''''''''''
+'   Home/Main Screen  '
+'''''''''''''''''''''''
+package "Friendo - Database Relationships" <<Frame>> {
+
+
+entity "User" as user {
+  PK id
+  --
+  - String name
+  - String bio
+  - int age
+  - Binary picture
+  --
+  - authenticationPlaceHolder
+}
+
+entity "Interest" as interest {
+  PK id
+  --
+  - String name
+}
+
+entity "Bookmark" as bookmark {
+  PK id
+  --
+  - String name
+  --
+  FK user_id
+}
+
+entity "JoinUsersAndInterests" as joinUsersAndInterests {
+  PK id
+  --
+  FK user_id
+  FK interest_id
+}
+
+
+user ||--o{ joinUsersAndInterests
+interest ||--o{ joinUsersAndInterests
+user ||--o{ bookmark
+
+@enduml

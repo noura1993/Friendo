@@ -1,0 +1,194 @@
+@startuml
+
+'''''''''''''
+'  Styling  '
+'''''''''''''
+
+' Theme configuration ===========================================
+!if (%not(%variable_exists("$font")))
+!$font = "Helvetica"
+!endif
+
+' Global skinparams =========================================
+skinparam BackgroundColor White 
+skinparam Shadowing false
+skinparam lineType ortho
+hide empty members
+hide circle
+
+skinparam Default {
+  FontName $font
+  FontColor Black
+}
+
+skinparam Diagram {
+  BorderColor Black
+}
+
+skinparam Arrow {
+  Color Black
+  FontColor Black
+  FontStyle Italic
+}
+
+skinparam Package {
+  FontColor Black
+  BackgroundColor White
+  BorderColor Black
+}
+
+' Usecase ===============================================
+skinparam Usecase {
+  BackgroundColor White
+  BorderColor Black
+  FontColor Black
+}
+
+skinparam Actor {
+  BackgroundColor White
+  BorderColor Black
+  FontColor Black
+}
+
+' Class ===============================================
+skinparam CircledCharacter {
+  FontName $font
+  FontColor Black
+  FontSize 12
+  Radius 8
+}
+
+skinparam Class {
+  BackgroundColor White
+  BorderColor Black
+  FontColor Black
+  FontStyle Bold
+  hide circle
+
+  Attribute {
+    FontColor Black
+    ' IconSize 0
+  }
+}
+
+
+'''''''''''''''''''''''
+'   Home/Main Screen  '
+'''''''''''''''''''''''
+package "Friendo - Component Hierarchy" <<Frame>> {
+
+
+class LaunchContainer {
+  State: isLoggedIn
+  Props: None
+}
+
+class SignUp {
+  State: None
+  Props: None
+}
+
+class LoginIn {
+  State: None
+  Props: None
+}
+
+''''''''''''''''''''''''''''''''
+'  Container, Header, IconBar  '
+''''''''''''''''''''''''''''''''
+
+class AppContainer {
+ States:
+  isProfileView, 
+  isMainView,
+  isSearchView,
+  isHeader,
+  isIconBar,
+  isTagButtons,
+  isSelectionResult,
+  isSuggestedMatch,
+  isSearchBar
+ Props: None
+}
+
+class Header {
+  State: None
+  Props: None
+}
+
+class IconBar {
+  State: None
+  Props: None
+}
+
+
+class Profile {
+   State: 
+    picture,
+    name,
+    age, 
+    bio, 
+    userInterests,
+    isMyProfile,
+    isBookmarked
+  Props: None
+}
+
+class BookmarkList {
+  State: None
+  Props: 
+    picture, 
+    interests
+}
+
+
+class TagButtons {
+  State: 
+  interestButtons, 
+  selectedInterest
+  Props: userInterests
+}
+
+class SuggestedMatch  {
+  State: usersWithSameInterests
+  Props: selectedInterest
+}
+
+
+
+class SearchBar {
+  State: searchTerm
+  Props: None
+}
+
+class SearchResults {
+  State: None
+  Props: None
+}
+
+' SignUp & Login Screen '
+SignUp -left-> LaunchContainer
+LoginIn -right-> LaunchContainer
+
+LaunchContainer -left-> SignUp
+LaunchContainer -right-> LoginIn
+
+LaunchContainer --> AppContainer
+
+' Container, Header, IconBar '
+AppContainer --> Header
+AppContainer --> IconBar
+
+' Profiles '
+AppContainer --> Profile
+Profile --> BookmarkList
+
+' Main Screen '
+AppContainer --> TagButtons
+AppContainer --> SuggestedMatch
+
+' Search Bar '
+AppContainer --> SearchBar
+SearchBar --> SearchResults
+
+@enduml
