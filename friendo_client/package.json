@@ -7,13 +7,14 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "tcomb": "tcomb-form-native",
-    "podInstall": "cd ios/ && pod install",
+    "podInstall": "npx pod-install",
     "test": "jest",
     "lint": "eslint ."
   },
   "dependencies": {
     "react": "16.13.1",
     "react-native": "0.63.2",
+    "react-native-linear-gradient": "^2.5.6",
     "tcomb-form-native": "^0.6.20"
   },
   "devDependencies": {
