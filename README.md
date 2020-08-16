@@ -60,12 +60,12 @@ server/node_modules/
 
 ## Front-End `/client`
 
-5. Create `client` folder with React Native
+1. Create `client` folder with React Native
 ```
 npx react-native init client
 ```
 
-6. Create services folder and ProjectService.js
+2. Create services folder and ProjectService.js
 
 ```
 cd client
@@ -73,13 +73,13 @@ mkdir /services
 touch /services/ProjectService.js
 ```
 
-7. Install Watchman
+3. Install Watchman
   
 ```
 brew install watchman
 ```
 
-8. Install Xcode & CocoaPods
+4. Install Xcode & CocoaPods
 
 Install Xcode via the Mac App Store.
 
@@ -89,44 +89,58 @@ Install CocoaPods with:
 sudo gem install cocoapods
 ```
 
+5. Install gradient tools
+
+Install gradient dependencies
+
+```
+npm install --save react-native-linear-gradient
+```
+
+Re-install pod
+
+```
+npm run podInstall
+```
+
 ## Back-End `/server`
 
-9. On `/project_name`,
+1. On `/project_name`,
 create `server` folder. 
 
 ```
 mkdir server
 ```
-10. Initiate `server`
+2. Initiate `server`
 
 ```
 cd server
 npm init -y
 ```
 
-11. Create `db` and `helpers` folders within `server` plus `server.js`
+3. Create `db` and `helpers` folders within `server` plus `server.js`
 ```
 mkdir db helpers
 touch server.js
 ```
 
-12. Create `seeds.js` and `create_routers.js` inside `db` and `helpers`
+4. Create `seeds.js` and `create_routers.js` inside `db` and `helpers`
 
 ```
 touch db/seeds.js helpers/create_routers.js
 ```
 
-13. Install nodemon
+5. Install nodemon
 ```
 npm install -D nodemon
 ```
 
-14. Install express, node-postgres and cors
+6. Install express, node-postgres and cors
 ```
 npm install express pg cors
 ```
 
-15. Add the following to /server/package.json
+7. Add the following to /server/package.json
 
 ```
 "scripts": {
@@ -142,7 +156,7 @@ npm install express pg cors
 
 ### Server
 
-16. Run express:
+1. Run express:
 
 ```
 npm run server:dev
@@ -150,8 +164,14 @@ npm run server:dev
 
 ### Client
 
-17. Run client server
+2. Run client server
     
+Start front-end process
+```
+rpm run start
+```
+
+Run simulator
 ```
 npm run ios
 ```
