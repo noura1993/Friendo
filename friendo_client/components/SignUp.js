@@ -10,10 +10,23 @@ const User = t.struct({
     firstName: t.String,
     lastName: t.String,
     age: t.Integer,
-    username: t.String,
+    email: t.String,
     password: t.String,
     confirmPassword: t.String
 });
+
+const options = {
+  fields: {
+    password: {
+      password: true,
+      secureTextEntry: true
+    },
+    confirmPassword: {
+      password: true,
+      secureTextEntry: true
+    }
+  }
+};
 
 class SignUp extends Component {
 
@@ -23,6 +36,7 @@ class SignUp extends Component {
         <Form 
           ref={c => this._form = c}
           type={User} 
+          options={options} 
         />
         <FriendoButton
           text="Confirm Details!"

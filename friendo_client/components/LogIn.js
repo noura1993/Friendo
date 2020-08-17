@@ -6,7 +6,7 @@ import FriendoButton from './FriendoButton';
 const Form = t.form.Form;
 
 const User = t.struct({
-  username: t.String,
+  email: t.String,
   password: t.String
 });
 
