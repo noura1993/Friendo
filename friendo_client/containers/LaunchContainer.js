@@ -24,8 +24,8 @@ class LaunchContainer extends Component {
     signupHideAndShow() {
         this.setState(previousState => ({ isSignUpVisible: !previousState.isSignUpVisible }))
     }
-    
-      
+
+
 
 
     render() {
@@ -33,33 +33,38 @@ class LaunchContainer extends Component {
             <View style={styles.launchContainer}>
 
                 <View>
-                    {this.state.isLoginVisible ? <LogIn style={styles.login}/> : null }
+                    {this.state.isLoginVisible ? <LogIn style={styles.login} /> : null}
                 </View>
-                
+
                 <View>
-                    {this.state.isSignUpVisible ? <SignUp style={styles.signup}/> : null }
+                    {this.state.isSignUpVisible ? <SignUp style={styles.signup} /> : null}
                 </View>
 
-                <FriendoButton 
-                    text="Log In" 
-                    buttonExternalStyles={styles.buttonExtraStyle} 
-                    onPressMethod={this.loginHideAndShow} />   
+                {this.state.isLoginVisible || this.state.isSignUpVisible ? null :
+                    <FriendoButton
+                        text="Log In"
+                        buttonExternalStyles={styles.buttonExtraStyle}
+                        onPressMethod={this.loginHideAndShow} />
+                }
 
-                <FriendoButton 
-                    text="Sign Up"
-                    buttonExternalStyles={styles.buttonExtraStyle} 
-                    onPressMethod={this.signupHideAndShow} />
+                {this.state.isLoginVisible || this.state.isSignUpVisible ? null :
+                    <FriendoButton
+                        text="Sign Up"
+                        buttonExternalStyles={styles.buttonExtraStyle}
+                        onPressMethod={this.signupHideAndShow} />
+                }
+
             </View>
 
         )
     }
-} 
+}
 
 const styles = StyleSheet.create({
     launchContainer: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center'
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     buttonExtraStyle: {
         width: "30%"
