@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
+import { ActivityIndicator, FlatList } from 'react-native';
 
 const Friendo = () => {
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8080/users')
+      .then((response) => response.json())
+      .then((json) => { 
+        console.log(json);
+      setData(json)})
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false))
+  }, []);
+
   return (
     <View
       style={{
@@ -9,8 +23,39 @@ const Friendo = () => {
         justifyContent: "center",
         alignItems: "center"
       }}>
-      <Text>Hello,</Text>
+      <Text>Hello Bambino,</Text>
+      {/* {isLoading ? <ActivityIndicator/> : (
+        <FlatList
+          data={data}
+          keyExtractor={({ id }, index) => id}
+          renderItem={({ item }) => (
+            <Text>{item.name}, item.releaseYear</Text>
+          )}
+        />
+      )} */}
     </View>
   )
 }
 export default Friendo;
+
+/*
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, FlatList, Text, View } from 'react-native';
+
+export default App = () => {
+
+  return (
+    <View style={{ flex: 1, padding: 24 }}>
+      {isLoading ? <ActivityIndicator/> : (
+        <FlatList
+          data={data}
+          keyExtractor={({ id }, index) => id}
+          renderItem={({ item }) => (
+            <Text>{item.title}, {item.releaseYear}</Text>
+          )}
+        />
+      )}
+    </View>
+  );
+};
+*/
