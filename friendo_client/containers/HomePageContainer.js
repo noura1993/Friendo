@@ -3,6 +3,7 @@ import {Text, View, StyleSheet} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../components/Home';
+import Search from '../components/Search';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,6 +22,7 @@ class HomePageContainer extends Component {
     return (
        <NavigationContainer independent={true}>
             <Tab.Navigator>
+                <Tab.Screen name="Search" component={Search} />
                 <Tab.Screen name="Home" component={Home} />
             </Tab.Navigator>
         </NavigationContainer>
