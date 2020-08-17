@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 import t from 'tcomb-form-native';
+import FriendoButton from './FriendoButton';
 
 
 const Form = t.form.Form;
@@ -16,24 +17,25 @@ const User = t.struct({
 
 class SignUp extends Component {
 
-    render() {
-        return (
-             <View style={styles.container}>
+  render() {
+    return (
+      <View style={styles.container}>
         <Form 
           ref={c => this._form = c}
           type={User} 
         />
-        <Button
-          title="Confirm Details!"
-          onPress={this.handleSubmit}
-        />
-        <Button
-          title="Back"
-          onPress={this.handleSubmit}
-        />
+        <FriendoButton
+          text="Confirm Details!"
+          buttonExternalStyles={styles.buttonExtraStyle} 
+          onPressMethod={this.handleSubmit} />
+
+        <FriendoButton
+          text="Back"
+          buttonExternalStyles={styles.buttonExtraStyle} 
+          onPressMethod={this.handleSubmit} />
       </View>
-        )
-    }
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -42,6 +44,9 @@ const styles = StyleSheet.create({
       marginTop: 50,
       padding: 20
     },
+    buttonExtraStyle: {
+      width: "88%"
+    }
   });
 
 export default SignUp;

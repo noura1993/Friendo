@@ -8,7 +8,7 @@ class Friendo extends Component {
   render() {
     return (
       <View style={styles.app}>
-        <LinearGradient style={styles.linearGradient} colors={['#862d59', '#009999', '#862d59']}>
+        <LinearGradient style={styles.linearGradient} colors={['#ff6666', '#df80ff', '#668cff', '#66ffff']}>
           <LaunchContainer />
         {/* <PageContainer/> */}
         </LinearGradient>

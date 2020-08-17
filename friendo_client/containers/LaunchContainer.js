@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import LogIn from '../components/LogIn';
 import SignUp from '../components/SignUp';
-import { Platform, View, StyleSheet, Button } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import FriendoButton from '../components/FriendoButton';
 
 
 class LaunchContainer extends Component {
@@ -39,9 +40,15 @@ class LaunchContainer extends Component {
                     {this.state.isSignUpVisible ? <SignUp style={styles.signup}/> : null }
                 </View>
 
-                <Button title="Log In" onPress={this.loginHideAndShow} />
-                <Button title="Sign Up" onPress={this.signupHideAndShow} />
-                
+                <FriendoButton 
+                    text="Log In" 
+                    buttonExternalStyles={styles.buttonExtraStyle} 
+                    onPressMethod={this.loginHideAndShow} />   
+
+                <FriendoButton 
+                    text="Sign Up"
+                    buttonExternalStyles={styles.buttonExtraStyle} 
+                    onPressMethod={this.signupHideAndShow} />
             </View>
 
         )
@@ -52,9 +59,11 @@ const styles = StyleSheet.create({
     launchContainer: {
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center',
+      alignItems: 'center'
+    },
+    buttonExtraStyle: {
+        width: "30%"
     }
-    
 })
 
 export default LaunchContainer;
