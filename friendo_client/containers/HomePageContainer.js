@@ -14,12 +14,6 @@ const Stack = createStackNavigator();
 class HomePageContainer extends Component {
   constructor(props) {
     super(props);
-
-    this.loginHideAndShow = this.loginHideAndShow.bind(this);
-  }
-
-  loginHideAndShow() {
-    this.props.navigation.navigate('LogIn');
   }
 
   render() {
