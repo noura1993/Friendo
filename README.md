@@ -37,42 +37,22 @@ Our goal is to create a social media platform that matches people based on simil
 
 
 
-# Project Setup Checklist
 
-1. Create `project_name` folder. 
-```
-mkdir project_name
-```
-2. Git init
-```
-cd project_name
-git init
-```
-3. Create .gitignore
-```
-touch .gitignore
-```
-4. Add the following to .gitignore
-```
-client/node_modules/
-server/node_modules/
-```
 
-## Front-End `/client`
 
+<<<<<<< HEAD
 1. Create `client` folder with React Native
 ```
 npx react-native init client
 ```
 
 2. Create services folder and ProjectService.js
+=======
 
-```
-cd client
-mkdir /services
-touch /services/ProjectService.js
-```
+>>>>>>> develop
 
+
+<<<<<<< HEAD
 3. Install Watchman
   
 ```
@@ -274,6 +254,10 @@ Change computer's default editor for VSCode:
 ```
 git config --global core.editor "code --wait"
 ```
+=======
+
+
+>>>>>>> develop
 
 
 
