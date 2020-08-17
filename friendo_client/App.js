@@ -31,6 +31,7 @@ class Friendo extends Component {
             <Stack.Screen name="Profile" component={Profile} /> 
             <Stack.Screen name="Home" component={HomePageContainer} 
                   options={({ navigation }) => ({ 
+                    headerLeft: null,
                     headerRight: () => (
                       <Button
                           onPress={() => navigation.navigate('Profile')}

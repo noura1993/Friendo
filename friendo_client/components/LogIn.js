@@ -29,6 +29,10 @@ class LogIn extends Component {
 
   handleLogIn() {
     this.props.navigation.navigate('Home');
+    this.props.navigation.reset({
+      index: 0,
+      routes: [{ name: 'Home' }],
+    });
   }
 
   render() {
