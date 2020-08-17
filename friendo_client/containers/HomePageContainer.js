@@ -22,7 +22,7 @@ class HomePageContainer extends Component {
   render() {
     return (
        <NavigationContainer independent={true}>
-            <Tab.Navigator>
+            <Tab.Navigator initialRouteName="Home" >
                 <Tab.Screen name="Search" component={Search} />
                 <Tab.Screen name="Home" component={Home} />
                 <Tab.Screen name="Profile" component={Profile} />
