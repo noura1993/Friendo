@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-// import LogIn from '../components/LogIn';
-import LogInPrototype from '../components/LogInPrototype';
+import LogIn from '../components/LogIn';
 import { NavigationContainer } from '@react-navigation/native';
 import SignUp from '../components/SignUp';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import FriendoButton from '../components/FriendoButton';
 import { createStackNavigator } from '@react-navigation/stack';
 
-class LaunchContainer extends Component {
+class WelcomePageContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -29,10 +28,10 @@ class LaunchContainer extends Component {
 
     render() {
         return (
-            <View style={styles.launchContainer}>
+            <View style={styles.welcomePageContainer}>
 
                 <View>
-                    {this.state.isLoginVisible ? <LogInPrototype style={styles.login} /> : null}
+                    {this.state.isLoginVisible ? <LogIn style={styles.login} /> : null}
                 </View>
 
                 <View>
@@ -58,7 +57,7 @@ class LaunchContainer extends Component {
 }
 
 const styles = StyleSheet.create({
-    launchContainer: {
+    welcomePageContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
@@ -68,5 +67,5 @@ const styles = StyleSheet.create({
     }
 })
 
-export default LaunchContainer;
+export default WelcomePageContainer;
 
