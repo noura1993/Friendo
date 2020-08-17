@@ -53,7 +53,6 @@ class SignUp extends Component {
           text="Submit!"
           buttonExternalStyles={styles.buttonExtraStyle} 
           onPressMethod={this.handleSubmit} />
-
       </View>
     )
   }
@@ -66,7 +65,7 @@ const styles = StyleSheet.create({
       padding: 20
     },
     buttonExtraStyle: {
-      width: "88%"
+      width: "100%"
     }
   });
 
