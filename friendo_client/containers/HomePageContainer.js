@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../components/Home';
 import Search from '../components/Search';
+import Profile from '../components/Profile';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,6 +25,7 @@ class HomePageContainer extends Component {
             <Tab.Navigator>
                 <Tab.Screen name="Search" component={Search} />
                 <Tab.Screen name="Home" component={Home} />
+                <Tab.Screen name="Profile" component={Profile} />
             </Tab.Navigator>
         </NavigationContainer>
     );
