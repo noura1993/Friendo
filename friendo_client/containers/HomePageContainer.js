@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../components/Home';
 import Search from '../components/Search';
 import Profile from '../components/Profile';
+import Friends from '../components/Friends';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -28,7 +29,7 @@ class HomePageContainer extends Component {
             <Tab.Navigator initialRouteName="Home" >
                 <Tab.Screen name="Search" component={Search} />
                 <Tab.Screen name="Home" component={Home} />
-                <Tab.Screen name="Profile" component={Profile} />
+                <Tab.Screen name="Friends" component={Friends} />
             </Tab.Navigator>
         </NavigationContainer>
         </>
