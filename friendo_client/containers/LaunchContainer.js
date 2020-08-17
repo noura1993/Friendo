@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import LogIn from '../components/LogIn';
+// import LogIn from '../components/LogIn';
+import LogInPrototype from '../components/LogInPrototype';
+import { NavigationContainer } from '@react-navigation/native';
 import SignUp from '../components/SignUp';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import FriendoButton from '../components/FriendoButton';
-
+import { createStackNavigator } from '@react-navigation/stack';
 
 class LaunchContainer extends Component {
     constructor(props) {
@@ -18,22 +20,19 @@ class LaunchContainer extends Component {
     }
 
     loginHideAndShow() {
-        this.setState(previousState => ({ isLoginVisible: !previousState.isLoginVisible }))
+        this.props.navigation.navigate('LogIn');
     }
 
     signupHideAndShow() {
-        this.setState(previousState => ({ isSignUpVisible: !previousState.isSignUpVisible }))
+        this.props.navigation.navigate('SignUp');
     }
-
-
-
 
     render() {
         return (
             <View style={styles.launchContainer}>
 
                 <View>
-                    {this.state.isLoginVisible ? <LogIn style={styles.login} /> : null}
+                    {this.state.isLoginVisible ? <LogInPrototype style={styles.login} /> : null}
                 </View>
 
                 <View>
@@ -53,9 +52,7 @@ class LaunchContainer extends Component {
                         buttonExternalStyles={styles.buttonExtraStyle}
                         onPressMethod={this.signupHideAndShow} />
                 }
-
-            </View>
-
+            </View> 
         )
     }
 }
