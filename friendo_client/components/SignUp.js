@@ -29,10 +29,6 @@ class SignUp extends Component {
           buttonExternalStyles={styles.buttonExtraStyle} 
           onPressMethod={this.handleSubmit} />
 
-        <FriendoButton
-          text="Back"
-          buttonExternalStyles={styles.buttonExtraStyle} 
-          onPressMethod={this.handleSubmit} />
       </View>
     )
   }

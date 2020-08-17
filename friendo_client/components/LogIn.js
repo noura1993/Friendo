@@ -11,6 +11,15 @@ const User = t.struct({
   password: t.String
 });
 
+const options = {
+  fields: {
+    password: {
+      password: true,
+      secureTextEntry: true
+    }
+  }
+};
+
 class LogIn extends Component {
   // constructor(props) {
   //   super(props);
@@ -20,23 +29,25 @@ class LogIn extends Component {
   // }
   render() {
     return (
+      
       <View style={styles.container}>
 
-        <Form ref={(c) => (this._form = c)} type={User} />
+        <Form 
+          ref={(c) => (this._form = c)} 
+          type={User}
+          options={options} 
+        />
         {/* <PasswordInputText
           value={this.state.password}
           onChangeText={ (password) => this.setState({ password }) } /> */}
+        
 
         <FriendoButton
           text="Log In!"
           buttonExternalStyles={styles.buttonExtraStyle}
           onPressMethod={this.handleSubmit}
         />
-        <FriendoButton
-          text="Back"
-          buttonExternalStyles={styles.buttonExtraStyle}
-          onPressMethod={this.handleSubmit}
-        />
+ 
       </View>
     );
   }
