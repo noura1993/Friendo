@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import WelcomePageContainer from './containers/WelcomePageContainer';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 import HomePageContainer from './containers/HomePageContainer';
+import Profile from './components/Profile';
 
 const Stack = createStackNavigator();
 
@@ -18,7 +19,17 @@ class Friendo extends Component {
             <Stack.Screen name="Friendo" component={WelcomePageContainer} />
             <Stack.Screen name="LogIn" component={LogIn} />
             <Stack.Screen name="SignUp" component={SignUp} /> 
-            <Stack.Screen name="Home" component={HomePageContainer} /> 
+            <Stack.Screen name="Profile" component={Profile} /> 
+            <Stack.Screen name="Home" component={HomePageContainer} 
+                  options={({ navigation }) => ({ 
+                    headerRight: () => (
+                      <Button
+                          onPress={() => navigation.navigate('Profile')}
+                          title="Profile"
+                          color="#00cc00" /> 
+                              )
+                  })}
+            /> 
           </Stack.Navigator>
         </NavigationContainer>
     )

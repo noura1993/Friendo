@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../components/Home';
 import Search from '../components/Search';
 import Profile from '../components/Profile';
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 class HomePageContainer extends Component {
   constructor(props) {
@@ -21,6 +23,7 @@ class HomePageContainer extends Component {
 
   render() {
     return (
+        <>
        <NavigationContainer independent={true}>
             <Tab.Navigator initialRouteName="Home" >
                 <Tab.Screen name="Search" component={Search} />
@@ -28,6 +31,7 @@ class HomePageContainer extends Component {
                 <Tab.Screen name="Profile" component={Profile} />
             </Tab.Navigator>
         </NavigationContainer>
+        </>
     );
   }
 }
