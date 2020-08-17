@@ -6,7 +6,6 @@ import LinearGradient from 'react-native-linear-gradient';
 class WelcomePageContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
 
     this.loginHideAndShow = this.loginHideAndShow.bind(this);
     this.signupHideAndShow = this.signupHideAndShow.bind(this);
@@ -31,21 +30,16 @@ class WelcomePageContainer extends Component {
             '#00cccc',
           ]}>
             <View style={styles.welcomePageContainer}> 
-                {this.state.isLoginVisible || this.state.isSignUpVisible ? null : (
                 <FriendoButton
                     text="Log In"
                     buttonExternalStyles={styles.buttonExtraStyle}
                     onPressMethod={this.loginHideAndShow}
                 />
-                )}
-                {this.state.isLoginVisible || this.state.isSignUpVisible ? null : (
                 <FriendoButton
                     text="Sign Up"
                     buttonExternalStyles={styles.buttonExtraStyle}
                     onPressMethod={this.signupHideAndShow}
                 />
-                )}
-            
             </View>
       </LinearGradient >
     );
