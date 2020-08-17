@@ -28,7 +28,7 @@ class WelcomePageContainer extends Component {
             '#ff6666',
             '#df80ff',
             '#668cff',
-            '#66ffff',
+            '#00cccc',
           ]}>
             <View style={styles.welcomePageContainer}> 
                 {this.state.isLoginVisible || this.state.isSignUpVisible ? null : (

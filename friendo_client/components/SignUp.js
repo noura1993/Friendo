@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet} from 'react-native';
 import t from 'tcomb-form-native';
 import FriendoButton from './FriendoButton';
+import LinearGradient from 'react-native-linear-gradient';
 
 
 const Form = t.form.Form;
@@ -43,8 +44,15 @@ class SignUp extends Component {
 
   render() {
     return (
+      <LinearGradient
+          style={styles.linearGradient}
+          colors={[
+            '#668cff',
+            '#00cccc'
+          ]}>
       <View style={styles.container}>
-        <Form 
+        <Form  
+          style={{color: "white"}}
           ref={c => this._form = c}
           type={User} 
           options={options} 
@@ -54,6 +62,7 @@ class SignUp extends Component {
           buttonExternalStyles={styles.buttonExtraStyle} 
           onPressMethod={this.handleSubmit} />
       </View>
+      </LinearGradient>
     )
   }
 }
@@ -62,10 +71,16 @@ const styles = StyleSheet.create({
     container: {
       justifyContent: 'center',
       marginTop: 50,
-      padding: 20
+      marginRight: 50,
+      marginLeft: 50,
+      padding: 20,
+      backgroundColor: 'rgba(255, 255, 255, 0.30)',
     },
     buttonExtraStyle: {
       width: "100%"
+    },
+    linearGradient: {
+      flex: 1
     }
   });
 
