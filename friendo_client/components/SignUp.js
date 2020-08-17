@@ -9,7 +9,18 @@ const Form = t.form.Form;
 const User = t.struct({
     firstName: t.String,
     lastName: t.String,
-    age: t.Integer,
+    gender: t.enums({
+      male: "Male",
+      female: "Female"
+    }, 'gender'),
+    age: t.enums({ 
+      firstSection: "18-25",
+      seconedSection: "25-35",
+      thirdSection: "35-45",
+      fourthSection: "45-55",
+      fifthSection: "55-65",
+      sixthSection: "65+"
+    }, 'age'),
     email: t.String,
     password: t.String,
     confirmPassword: t.String
@@ -39,7 +50,7 @@ class SignUp extends Component {
           options={options} 
         />
         <FriendoButton
-          text="Confirm Details!"
+          text="Submit!"
           buttonExternalStyles={styles.buttonExtraStyle} 
           onPressMethod={this.handleSubmit} />
 
