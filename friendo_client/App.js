@@ -6,6 +6,7 @@ import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
+import HomePageContainer from './containers/HomePageContainer';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ class Friendo extends Component {
             <Stack.Screen name="Friendo" component={WelcomePageContainer} />
             <Stack.Screen name="LogIn" component={LogIn} />
             <Stack.Screen name="SignUp" component={SignUp} /> 
+            <Stack.Screen name="Home" component={HomePageContainer} /> 
           </Stack.Navigator>
         </NavigationContainer>
     )

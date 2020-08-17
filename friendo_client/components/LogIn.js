@@ -21,6 +21,15 @@ const options = {
 };
 
 class LogIn extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleLogIn = this.handleLogIn.bind(this);
+  }
+
+  handleLogIn() {
+    this.props.navigation.navigate('Home');
+  }
 
   render() {
     return (
@@ -39,7 +48,7 @@ class LogIn extends Component {
         <FriendoButton
           text="Log In!"
           buttonExternalStyles={styles.buttonExtraStyle}
-          onPressMethod={this.handleSubmit}
+          onPressMethod={this.handleLogIn}
         />
       </View>
       </LinearGradient >
