@@ -7,7 +7,8 @@ const Friendo = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-     fetch('http://10.0.2.2:8000/users')
+     fetch('http://localhost:8000/users')
+    //  fetch('http://10.0.2.2:8000/users')
       .then((response) => response.json())
       .then((json) => { 
         console.log(json);
@@ -23,7 +24,7 @@ const Friendo = () => {
         justifyContent: "center",
         alignItems: "center"
       }}>
-      <Text>Hello Bambino, xxxyz</Text>
+      <Text>Hello Bambino</Text>
       {isLoading ? <ActivityIndicator/> : (
         <FlatList
           data={data}

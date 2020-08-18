@@ -1,10 +1,10 @@
 DROP TABLE interest;
 -- DROP TABLE join_users_and_interests;
 -- DROP TABLE bookmark;
-DROP TABLE user;
+DROP TABLE users;
 
 
-CREATE TABLE user (
+CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   age INT,
