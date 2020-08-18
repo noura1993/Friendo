@@ -5,17 +5,23 @@ import { ApiUrl } from './ApiUrl';
 
 const Friendo = () => {
   const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [usersList, setUsersList] = useState([]);
+  const [interests, setInterests] = useState([]);
 
-  useEffect(() => {
-    fetch(ApiUrl('users'))
+  accessAPI = (endpointName, setter) => {
+    fetch(ApiUrl(endpointName))
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
-        setData(json)
+        setter(json)
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false))
+  }
+
+  useEffect(() => {
+    accessAPI('users', setUsersList)
+    accessAPI('interests', setInterests)
   }, []);
 
   const styles = StyleSheet.create({
@@ -38,24 +44,35 @@ const Friendo = () => {
         isLoading ?
           <ActivityIndicator />
           : (
-            <FlatList
-              data={data}
-              keyExtractor={({ id }, index) => id.toString()}
-              renderItem={({ item }) => (
-                <Fragment>
+            <Fragment>
+              <FlatList
+                data={usersList}
+                keyExtractor={({ id }, index) => id.toString()}
+                renderItem={({ item }) => (
+                  <Fragment>
+
+                    <Text>{item.name}</Text>
+
+                    <Image
+                      style={styles.tinyLogo}
+                      source={{
+                        uri: item.picture
+                      }}
+                    />
+
+                  </Fragment>
+                )}
+              />
+              <FlatList
+                data={interests}
+                keyExtractor={({ id }, index) => id.toString()}
+                renderItem={({ item }) => (
 
                   <Text>{item.name}</Text>
 
-                  <Image
-                    style={styles.tinyLogo}
-                    source={{
-                      uri: item.picture
-                    }}
-                  />
-
-                </Fragment>
-              )}
-            />
+                )}
+              />
+            </Fragment>
           )
       }
     </View>
@@ -63,24 +80,4 @@ const Friendo = () => {
 }
 export default Friendo;
 
-/*
-import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, Text, View } from 'react-native';
 
-export default App = () => {
-
-  return (
-    <View style={{ flex: 1, padding: 24 }}>
-      {isLoading ? <ActivityIndicator/> : (
-        <FlatList
-          data={data}
-          keyExtractor={({ id }, index) => id}
-          renderItem={({ item }) => (
-            <Text>{item.title}, {item.releaseYear}</Text>
-          )}
-        />
-      )}
-    </View>
-  );
-};
-*/
