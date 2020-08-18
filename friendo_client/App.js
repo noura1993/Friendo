@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import WelcomePageContainer from './containers/WelcomePageContainer';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
-import { StyleSheet, Button } from 'react-native';
+import { Button } from 'react-native';
 import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
@@ -11,13 +11,7 @@ import Profile from './components/Profile';
 
 const Stack = createStackNavigator();
 
-class Friendo extends Component {
-  constructor(props) {
-    super(props);
-
-  }
-
-  render() {
+const Friendo = () => {
     return ( 
       <NavigationContainer theme={DarkTheme}>
         <Stack.Navigator initialRouteName="Friendo" >
@@ -38,7 +32,6 @@ class Friendo extends Component {
         </Stack.Navigator>
       </NavigationContainer>
     )
-  }
 }
 
 export default Friendo;
