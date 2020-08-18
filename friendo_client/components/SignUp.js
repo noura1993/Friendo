@@ -99,7 +99,8 @@ const styles = StyleSheet.create({
     pickerContainer: {
       normal: {
         backgroundColor: '#fff',
-        borderRadius: 4
+        borderRadius: 4,
+        // height: 32
       }
     }
   };

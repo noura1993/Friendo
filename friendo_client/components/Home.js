@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, Image} from 'react-native';
 import MapView, { AnimatedRegion, Animated, Marker} from 'react-native-maps';
+// import logo from '../assets/FriendoLogo2.png';
 
 class Home extends Component {
   constructor(props) {
@@ -27,16 +28,16 @@ class Home extends Component {
     this.state.region.setValue(region);
   }
 
+
   render() {
     return (
       <MapView 
         style={styles.home}
         region={this.state.region}
-        
       > 
-      <MapView.Marker
-            coordinate={this.state.marker}
-         />
+      <Marker coordinate={this.state.marker}>
+        <Image source={require('../assets/FriendoLogo2.png')} style={{height: 35, width:35 }} />
+      </Marker>
       <Animated
         region={this.state.region}
         onRegionChange={this.onRegionChange}
