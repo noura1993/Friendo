@@ -1,7 +1,7 @@
-DROP TABLE interest;
+DROP TABLE IF EXISTS interests;
 -- DROP TABLE join_users_and_interests;
 -- DROP TABLE bookmark;
-DROP TABLE users;
+DROP TABLE IF EXISTS users;
 
 
 CREATE TABLE users (
@@ -26,7 +26,26 @@ CREATE TABLE users (
 --   interest_id INT references interest(id)
 -- );
 
-CREATE TABLE interest(
+CREATE TABLE interests (
   id SERIAL primary key,
   name VARCHAR(255) NOT NULL
-)
+);
+
+
+INSERT INTO users (name, age, picture, username, password) VALUES ('John', 23, 'https://api.adorable.io/avatars/127/John.png', 'john', 'asdf');
+INSERT INTO users (name, age, picture, username, password) VALUES ('James', 21, 'https://api.adorable.io/avatars/127/James.png', 'jam123', '123');
+INSERT INTO users (name, age, picture, username, password) VALUES ('Alex', 33, 'https://api.adorable.io/avatars/127/Alex.png', 'alex1983', 'passw0rd');
+INSERT INTO users (name, age, picture, username, password) VALUES ('Robin', 24, 'https://api.adorable.io/avatars/127/Robin.png', 'robo', '456');
+
+
+INSERT INTO interests (name) VALUES ('Gaming');
+INSERT INTO interests (name) VALUES ('Programming');
+INSERT INTO interests (name) VALUES ('Dancing');
+INSERT INTO interests (name) VALUES ('Rock Climbing');
+INSERT INTO interests (name) VALUES ('Hiking');
+INSERT INTO interests (name) VALUES ('Chess');
+
+
+
+
+

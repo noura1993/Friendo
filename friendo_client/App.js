@@ -1,21 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
-import { ActivityIndicator, FlatList } from 'react-native';
+import React, { useEffect, useState, Fragment } from 'react';
+import { Text, View, ActivityIndicator, FlatList, Image, StyleSheet } from 'react-native';
 
 const Friendo = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-     fetch('http://localhost:8000/users')
-    //  fetch('http://10.0.2.2:8000/users')
+    fetch('http://localhost:8000/users')
+      //  fetch('http://10.0.2.2:8000/users')
       .then((response) => response.json())
-      .then((json) => { 
+      .then((json) => {
         console.log(json);
-      setData(json)})
+        setData(json)
+      })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false))
   }, []);
+
+  const styles = StyleSheet.create({
+    tinyLogo: {
+      width: 50,
+      height: 50
+    }
+  });
+
 
   return (
     <View
@@ -25,15 +33,30 @@ const Friendo = () => {
         alignItems: "center"
       }}>
       <Text>Hello Bambino</Text>
-      {isLoading ? <ActivityIndicator/> : (
-        <FlatList
-          data={data}
-          keyExtractor={({ id }, index) => id}
-          renderItem={({ item }) => (
-            <Text>{item.name}</Text>
-          )}
-        />
-      )}
+      {
+        isLoading ?
+          <ActivityIndicator />
+          : (
+            <FlatList
+              data={data}
+              keyExtractor={({ id }, index) => id.toString()}
+              renderItem={({ item }) => (
+                <Fragment>
+
+                  <Text>{item.name}</Text>
+
+                  <Image
+                    style={styles.tinyLogo}
+                    source={{
+                      uri: item.picture
+                    }}
+                  />
+
+                </Fragment>
+              )}
+            />
+          )
+      }
     </View>
   )
 }
