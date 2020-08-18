@@ -35,6 +35,29 @@ app.get("/users", (req, res) => {
   basicSQLfetch(res, "users");
 });
 
+app.post("/users/:id", (req, res) => {
+  const id = req.params.id;
+  pool.query("UPDATE users SET \
+  firstName = $1, \
+  lastName = $2, \
+  email = $3, \
+  password = $4, \
+  gender = $5, \
+  age = $6, \
+  picture = $7 \
+  WHERE id = $8", 
+  [req.body.firstname, req.body.lastname, req.body.email, 
+    req.body.password, req.body.gender, req.body.age, req.body.picture,
+    id ],
+    (err, sqlRes) => {
+      if (err) {
+        res.json({ error: err });
+      } else {
+        res.json("ok");
+      }
+    })
+})
+
 app.get("/interests", (req, res) => {
   basicSQLfetch(res, "interests");
 });
