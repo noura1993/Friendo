@@ -37,6 +37,19 @@ app.get("/users", (req, res) => {
   })
 });
 
+app.get("/interests", (req, res) => {
+  pool.query("SELECT * FROM interests;", (err, sqlRes) => {
+      if (err) {
+          console.log(err)
+          res.json({ error: err });
+      } else {
+          console.log(sqlRes.rows);
+          res.json(sqlRes.rows);
+          // return
+      }
+  })
+});
+
 app.listen(port, () => {
   console.log(`Listening to requests on http://localhost:${port}`);
 });

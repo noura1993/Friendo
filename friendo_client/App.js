@@ -1,13 +1,14 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { Text, View, ActivityIndicator, FlatList, Image, StyleSheet } from 'react-native';
 
+import { ApiUrl } from './ApiUrl';
+
 const Friendo = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8000/users')
-      //  fetch('http://10.0.2.2:8000/users')
+    fetch(ApiUrl('users'))
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
