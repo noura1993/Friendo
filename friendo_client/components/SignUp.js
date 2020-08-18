@@ -100,10 +100,10 @@ const styles = StyleSheet.create({
       normal: {
         backgroundColor: '#fff',
         borderRadius: 4,
-        // height: 32
+      }
       }
     }
-  };
+  
 
   const options = {
     fields: {
