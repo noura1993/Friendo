@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, Image, TextInput} from 'react-native';
+import {Text, View, StyleSheet, Image, TextInput, ScrollView, TouchableOpacity} from 'react-native';
 import MapView, { AnimatedRegion, Animated, Marker} from 'react-native-maps';
 
 class Home extends Component {
@@ -17,11 +17,23 @@ class Home extends Component {
         longitude: -3.188267
       },
       icons: {
-        uri: require("../assets/FriendoLogo2.png")
+        logo:{
+          uri: require("../assets/FriendoLogo2.png")
+        },
+        searchIcon: {
+          uri: require("../assets/search.png")
+        },
+       
       },
-      searchIcon: {
-        uri: require("../assets/search.png")
-      }
+      
+      categories:[
+        {interest: 'Gaming', icon: require('../assets/gamepad.png')},
+        {interest: 'Sport',  icon: require('../assets/football.png')},
+        {interest: 'Art', icon: require('../assets/gallery.png')},
+        {interest: 'Gaming', icon: require('../assets/gamepad.png')},
+        {interest: 'Sport', icon: require('../assets/football.png')},
+        {interest: 'Art', icon: require('../assets/gallery.png')},
+      ]
     }
 
     this.onRegionChange = this.onRegionChange.bind(this);
@@ -40,7 +52,7 @@ class Home extends Component {
         region={this.state.region}
       > 
       <Marker coordinate={this.state.marker}>
-        <Image source={this.state.icons.uri} style={{height: 50, width:50 }} />
+        <Image source={this.state.icons.logo.uri} style={{height: 50, width:50 }} />
       </Marker>
       <Animated
         region={this.state.region}
@@ -55,9 +67,27 @@ class Home extends Component {
          autoCapitalize="none"
          style={{flex:1,padding:0}}
        />
-        <Image source={this.state.searchIcon.uri} style={{height: 25, width:25 }} />
-       {/* <Ionicons name="ios-search" size={20} /> */}
+        <Image source={this.state.icons.searchIcon.uri} style={{height: 25, width:25 }} />
      </View>
+     <ScrollView
+        horizontal
+        scrollEventThrottle={1}
+        showsHorizontalScrollIndicator={false}
+        height={50}
+        style={styles.tagsScrollView}
+        contentInset={{ 
+          top:0,
+          left:0,
+          bottom:0,
+          right:20
+        }}
+        >
+          {this.state.categories.map((category, index) => (
+          <TouchableOpacity key={index} style={styles.tagsItem}>
+            <Text>{category.interest}</Text>
+          </TouchableOpacity>
+        ))}
+        </ScrollView>
      </>
     );
   }
@@ -83,6 +113,29 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 5,
     elevation: 10
+  },
+  tagsScrollView: {
+    position:'absolute', 
+    top:90, 
+    paddingHorizontal:10
+  },
+  tagsItem: {
+    flexDirection:"row",
+    backgroundColor:'#fff', 
+    borderRadius:20,
+    padding:8,
+    paddingHorizontal:20, 
+    marginHorizontal:5,
+    marginVertical: 5,
+    height:35,
+    shadowColor: '#ccc',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 10
+  },
+  tagsIcon: {
+    marginRight: 5,
   }
 });
 export default Home;
