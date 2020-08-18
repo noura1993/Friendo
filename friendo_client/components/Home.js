@@ -12,10 +12,16 @@ class Home extends Component {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       },
-      marker: {
-        latitude: 55.953251,
-        longitude: -3.188267
-      },
+      markers: [{
+        coordinate: {
+          latitude: 55.953251,
+          longitude: -3.188267
+        },
+        image: require("../assets/FriendoLogo2.png"),
+        name: "Jack Friendo",
+        age: "25-35",
+        description: "I have the best mustache :p"
+      }],
       icons: {
         logo:{
           uri: require("../assets/FriendoLogo2.png")
@@ -51,9 +57,11 @@ class Home extends Component {
         style={styles.home}
         region={this.state.region}
       > 
-      <Marker coordinate={this.state.marker}>
-        <Image source={this.state.icons.logo.uri} style={{height: 50, width:50 }} />
-      </Marker>
+      {this.state.markers.map( (marker) => (
+        <Marker coordinate={marker.coordinate}>
+          <Image source={marker.image} style={{height: 50, width:50 }} />
+        </Marker>
+      ))}
       <Animated
         region={this.state.region}
         onRegionChange={this.onRegionChange}
