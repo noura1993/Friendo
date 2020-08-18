@@ -30,16 +30,16 @@ class WelcomePageContainer extends Component {
             '#00cccc',
           ]}>
             <View style={styles.welcomePageContainer}> 
-                <FriendoButton
-                    text="Log In"
-                    buttonExternalStyles={styles.buttonExtraStyle}
-                    onPressMethod={this.loginHideAndShow}
-                />
-                <FriendoButton
-                    text="Sign Up"
-                    buttonExternalStyles={styles.buttonExtraStyle}
-                    onPressMethod={this.signupHideAndShow}
-                />
+              <FriendoButton
+                  text="Log In"
+                  buttonExternalStyles={styles.buttonExtraStyle}
+                  onPressMethod={this.loginHideAndShow}
+              />
+              <FriendoButton
+                  text="Sign Up"
+                  buttonExternalStyles={styles.buttonExtraStyle}
+                  onPressMethod={this.signupHideAndShow}
+              />
             </View>
       </LinearGradient >
     );
