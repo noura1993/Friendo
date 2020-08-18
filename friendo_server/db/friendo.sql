@@ -6,11 +6,13 @@ DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
+  firstName VARCHAR(255) NOT NULL,
+  lastName VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL, /* ? */
+  gender VARCHAR(255) NOT NULL,
   age INT,
-  picture VARCHAR(255) NOT NULL, /* BINARY, BYTEA ? */
-  username VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL /* ? */
+  picture VARCHAR(255) NOT NULL /* BINARY, BYTEA ? */
 );
 
 -- CREATE TABLE bookmark (
@@ -32,10 +34,10 @@ CREATE TABLE interests (
 );
 
 
-INSERT INTO users (name, age, picture, username, password) VALUES ('John', 23, 'https://api.adorable.io/avatars/127/John.png', 'john', 'asdf');
-INSERT INTO users (name, age, picture, username, password) VALUES ('James', 21, 'https://api.adorable.io/avatars/127/James.png', 'jam123', '123');
-INSERT INTO users (name, age, picture, username, password) VALUES ('Alex', 33, 'https://api.adorable.io/avatars/127/Alex.png', 'alex1983', 'passw0rd');
-INSERT INTO users (name, age, picture, username, password) VALUES ('Robin', 24, 'https://api.adorable.io/avatars/127/Robin.png', 'robo', '456');
+INSERT INTO users (firstName, lastName, email, password, gender, age, picture) VALUES ('John', 'Cook', 'john@cook.com', 'asdf', 'Male', 23, 'https://api.adorable.io/avatars/127/John.png');
+INSERT INTO users (firstName, lastName, email, password, gender, age, picture) VALUES ('James', 'Fraser', 'james@fraser.com', 'asdf', 'Male', 33, 'https://api.adorable.io/avatars/127/James.png');
+INSERT INTO users (firstName, lastName, email, password, gender, age, picture) VALUES ('Alex', 'Jones', 'alex@jones.com', 'asdf', 'Female', 31, 'https://api.adorable.io/avatars/127/Alex.png');
+INSERT INTO users (firstName, lastName, email, password, gender, age, picture) VALUES ('Robin', 'Hood', 'robin@hood.com', 'asdf', 'Female', 24, 'https://api.adorable.io/avatars/127/Robin.png');
 
 
 INSERT INTO interests (name) VALUES ('Gaming');
