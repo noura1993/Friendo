@@ -13,10 +13,7 @@ const pool = new Pool({
   database: process.env.PGDATABASE,
   // password: process.env.PGPASSWORD,
   port: process.env.PGPORT,
-}
-);
-
-
+});
 
 app.use(parser.json());
 
@@ -24,30 +21,22 @@ app.get("/", (req, res) => {
   res.status(200).send("Spicy Bambinos");
 });
 
-app.get("/users", (req, res) => {
-  pool.query("SELECT * FROM users;", (err, sqlRes) => {
-      if (err) {
-          console.log(err)
-          res.json({ error: err });
-      } else {
-          console.log(sqlRes.rows);
-          res.json(sqlRes.rows);
-          // return
-      }
+basicSQLfetch = (res, table) => {
+  pool.query("SELECT * FROM " + table + ";", (err, sqlRes) => {
+    if (err) {
+      res.json({ error: err });
+    } else {
+      res.json(sqlRes.rows);
+    }
   })
+}
+
+app.get("/users", (req, res) => {
+  basicSQLfetch(res, "users");
 });
 
 app.get("/interests", (req, res) => {
-  pool.query("SELECT * FROM interests;", (err, sqlRes) => {
-      if (err) {
-          console.log(err)
-          res.json({ error: err });
-      } else {
-          console.log(sqlRes.rows);
-          res.json(sqlRes.rows);
-          // return
-      }
-  })
+  basicSQLfetch(res, "interests");
 });
 
 app.listen(port, () => {
