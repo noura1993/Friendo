@@ -27,12 +27,12 @@ class Home extends Component {
       },
       
       categories:[
-        {interest: 'Gaming', icon: require('../assets/gamepad.png')},
-        {interest: 'Sport',  icon: require('../assets/football.png')},
-        {interest: 'Art', icon: require('../assets/gallery.png')},
-        {interest: 'Gaming', icon: require('../assets/gamepad.png')},
-        {interest: 'Sport', icon: require('../assets/football.png')},
-        {interest: 'Art', icon: require('../assets/gallery.png')},
+        {interest: 'Gaming', uri: require('../assets/gamepad.png')},
+        {interest: 'Sport',  uri: require('../assets/football.png')},
+        {interest: 'Art', uri: require('../assets/gallery.png')},
+        {interest: 'Gaming', uri: require('../assets/gamepad.png')},
+        {interest: 'Sport', uri: require('../assets/football.png')},
+        {interest: 'Art', uri: require('../assets/gallery.png')},
       ]
     }
 
@@ -84,7 +84,8 @@ class Home extends Component {
         >
           {this.state.categories.map((category, index) => (
           <TouchableOpacity key={index} style={styles.tagsItem}>
-            <Text>{category.interest}</Text>
+            <Image style={styles.iconStyle} source={category.uri}/>
+          <Text>{category.interest}</Text>
           </TouchableOpacity>
         ))}
         </ScrollView>
@@ -136,6 +137,12 @@ const styles = StyleSheet.create({
   },
   tagsIcon: {
     marginRight: 5,
+  },
+  iconStyle: {
+    width: 18,
+    height:18,
+    marginRight: 5
+
   }
 });
 export default Home;
