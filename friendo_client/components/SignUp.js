@@ -10,6 +10,9 @@ const Form = t.form.Form;
 const User = t.struct({
     firstName: t.String,
     lastName: t.String,
+    email: t.String,
+    password: t.String,
+    confirmPassword: t.String,
     gender: t.enums({
       male: "Male",
       female: "Female"
@@ -22,23 +25,7 @@ const User = t.struct({
       fifthSection: "55-65",
       sixthSection: "65+"
     }, 'age'),
-    email: t.String,
-    password: t.String,
-    confirmPassword: t.String
 });
-
-const options = {
-  fields: {
-    password: {
-      password: true,
-      secureTextEntry: true
-    },
-    confirmPassword: {
-      password: true,
-      secureTextEntry: true
-    }
-  }
-};
 
 class SignUp extends Component {
 
@@ -52,7 +39,6 @@ class SignUp extends Component {
           ]}>
       <View style={styles.container}>
         <Form  
-          style={{color: "white"}}
           ref={c => this._form = c}
           type={User} 
           options={options} 
@@ -74,7 +60,8 @@ const styles = StyleSheet.create({
       marginRight: 50,
       marginLeft: 50,
       padding: 20,
-      backgroundColor: 'rgba(255, 255, 255, 0.30)',
+      backgroundColor: 'rgba(255, 255, 255, 0.10)',
+      borderRadius: 20
     },
     buttonExtraStyle: {
       width: "100%"
@@ -83,5 +70,52 @@ const styles = StyleSheet.create({
       flex: 1
     }
   });
+
+  const formStyles = {
+    ...Form.stylesheet,
+    controlLabel: {
+      normal: {
+        color: 'white',
+        fontSize: 14
+      },
+      error: {
+        color: 'red',
+        fontSize: 14
+      },
+    },
+    textbox: {
+      normal: {
+        color: 'black',
+        height: 32,
+        padding: 7,
+        borderRadius: 4,
+        borderWidth: 0,
+        marginBottom: 5,
+        borderWidth: 1,
+        borderColor: 'white',
+        backgroundColor: 'white'
+      }
+    },
+    pickerContainer: {
+      normal: {
+        backgroundColor: '#fff',
+        borderRadius: 4
+      }
+    }
+  };
+
+  const options = {
+    fields: {
+      password: {
+        password: true,
+        secureTextEntry: true
+      },
+      confirmPassword: {
+        password: true,
+        secureTextEntry: true
+      }
+    },
+    stylesheet: formStyles
+  };
 
 export default SignUp;
