@@ -35,6 +35,22 @@ app.get("/users", (req, res) => {
   basicSQLfetch(res, "users");
 });
 
+app.post("/users/create", (req, res) => {
+  pool.query("INSERT INTO users \
+  (firstName, lastName, email, password, gender, age, picture) VALUES \
+  ($1, $2, $3, $4, $5, $6, $7) \
+  RETURNING id",
+  [req.body.firstname, req.body.lastname, req.body.email, 
+    req.body.password, req.body.gender, req.body.age, req.body.picture],
+    (err, sqlRes) => {
+      if (err) {
+        res.json({ error: err });
+      } else {
+        res.json(sqlRes.rows[0].id);
+      }
+    })
+})
+
 app.post("/users/:id", (req, res) => {
   const id = req.params.id;
   pool.query("UPDATE users SET \
