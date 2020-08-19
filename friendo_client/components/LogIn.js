@@ -20,11 +20,18 @@ class LogIn extends Component {
   }
 
   handleLogIn() {
-    this.props.navigation.navigate('Home');
-    this.props.navigation.reset({
-      index: 0,
-      routes: [{ name: 'Home' }],
-    });
+    const formData = this.refs.form.getValue();
+    if (!formData) return;
+    // TODO: fetch authentication from backend
+    if(formData.email === 'Admin' && formData.password === "123") {
+      this.props.navigation.navigate('Home');
+      this.props.navigation.reset({
+        index: 0,
+        routes: [{ name: 'Home' }],
+      });
+    } else {
+      alert('Incorrect email or password');
+    }
   }
 
   render() {
@@ -37,7 +44,7 @@ class LogIn extends Component {
       ]}>
       <View style={styles.container}>
         <Form 
-          ref={(c) => (this._form = c)} 
+          ref='form'
           type={User}
           options={options} 
         />   
@@ -93,6 +100,17 @@ const formStyles = {
       borderWidth: 1,
       borderColor: 'white',
       backgroundColor: 'white'
+    },
+    error: {
+        color: 'black',
+        height: 32,
+        padding: 7,
+        borderRadius: 4,
+        borderWidth: 0,
+        marginBottom: 5,
+        borderWidth: 1,
+        borderColor: 'white',
+        backgroundColor: 'white'
     }
   }
 };
