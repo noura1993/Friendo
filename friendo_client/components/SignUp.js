@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, StyleSheet} from 'react-native';
+import { View, StyleSheet, Button } from 'react-native';
 import t from 'tcomb-form-native';
 import FriendoButton from './FriendoButton';
 import LinearGradient from 'react-native-linear-gradient';
-
+import { useForm } from "react-hook-form";
 
 const Form = t.form.Form;
 
@@ -12,24 +12,29 @@ const User = t.struct({
     lastName: t.String,
     email: t.String,
     password: t.String,
-    confirmPassword: t.String,
-    gender: t.enums({
-      male: "Male",
-      female: "Female"
-    }, 'gender'),
-    age: t.enums({ 
-      firstSection: "18-25",
-      seconedSection: "25-35",
-      thirdSection: "35-45",
-      fourthSection: "45-55",
-      fifthSection: "55-65",
-      sixthSection: "65+"
-    }, 'age'),
+    // confirmPassword: t.String,
+    gender: t.String,
+    age: t.Number
+    // gender: t.enums({
+    //   male: "Male",
+    //   female: "Female"
+    // }, 'gender'),
+    // age: t.enums({ 
+    //   firstSection: "18-25",
+    //   seconedSection: "25-35",
+    //   thirdSection: "35-45",
+    //   fourthSection: "45-55",
+    //   fifthSection: "55-65",
+    //   sixthSection: "65+"
+    // }, 'age')
 });
 
-class SignUp extends Component {
+export default SignUp = (props) => {
+  const onSubmit = () => {
+    props.submitFunction(this._form.getValue());
+  }
 
-  render() {
+  //render() {
     return (
       <LinearGradient
           style={styles.linearGradient}
@@ -43,14 +48,18 @@ class SignUp extends Component {
           type={User} 
           options={options} 
         />
-        <FriendoButton
+         <Button
+          title="Sign Up!"
+          onPress={onSubmit}
+        />
+        {/* <FriendoButton
           text="Submit!"
           buttonExternalStyles={styles.buttonExtraStyle} 
-          onPressMethod={this.handleSubmit} />
+          onPressMethod={this.onSubmit} /> */}
       </View>
       </LinearGradient>
     )
-  }
+  //}
 }
 
 const styles = StyleSheet.create({
@@ -119,4 +128,4 @@ const styles = StyleSheet.create({
     stylesheet: formStyles
   };
 
-export default SignUp;
+// export default SignUp;
