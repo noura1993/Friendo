@@ -5,7 +5,7 @@ import MapView, { Marker, Animated as AnimatedRegion } from 'react-native-maps';
 
 const { width, height } = Dimensions.get("window");
 const CARD_HEIGHT = height * 0.25;
-const CARD_WIDTH = width * 0.6;
+const CARD_WIDTH = width * 0.9;
 
 class Home extends Component {
   constructor(props) {
@@ -142,7 +142,11 @@ class Home extends Component {
           horizontal
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator={false}
-          style={styles.bottomScrollView}>
+          style={styles.bottomScrollView}
+          pagingEnabled
+          snapToInterval={CARD_WIDTH + 20}
+          snapToAlignment="center">
+            
           {this.state.markers.map((marker, index) => (
             <View style={styles.card} key={index}>
               <Image
