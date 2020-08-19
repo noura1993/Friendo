@@ -43,7 +43,7 @@ app.post("/users/create", (req, res) => {
   ($1, $2, $3, $4, $5, $6, $7) \
   RETURNING id",
   [req.body.firstName, req.body.lastName, req.body.email, 
-    req.body.password, req.body.gender, req.body.age, "picture"],
+    req.body.password, req.body.gender, req.body.age, "https://api.adorable.io/avatars/128/" + req.body.name + ".png"],
     (err, sqlRes) => {
       if (err) {
         console.log(err)
