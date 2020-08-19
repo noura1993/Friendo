@@ -4,8 +4,8 @@ import MapView, { Marker, Animated as AnimatedRegion } from 'react-native-maps';
 
 
 const { width, height } = Dimensions.get("window");
-const CARD_HEIGHT = height * 0.25;
-const CARD_WIDTH = width * 0.9;
+const CARD_HEIGHT = height * 0.5;
+const CARD_WIDTH = width * 0.8;
 
 class Home extends Component {
   constructor(props) {
@@ -128,7 +128,7 @@ class Home extends Component {
             top: 0,
             left: 0,
             bottom: 0,
-            right: 20
+            right: 25
           }}
         >
           {this.state.categories.map((category, index) => (
@@ -144,8 +144,17 @@ class Home extends Component {
           showsHorizontalScrollIndicator={false}
           style={styles.bottomScrollView}
           pagingEnabled
-          snapToInterval={CARD_WIDTH + 20}
-          snapToAlignment="center">
+          snapToInterval={CARD_WIDTH + 25}
+          snapToAlignment="center"
+          style={styles.scrollView}
+          contentInset={{
+            top: 150,
+            left: 0,
+            bottom: 0,
+            right: 0
+          }}
+          
+          >
             
           {this.state.markers.map((marker, index) => (
             <View style={styles.card} key={index}>
@@ -183,6 +192,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 7
   },
+  scrollView: {
+    position: 'absolute',
+    bottom:0,
+    paddingHorizontal: 10,
+    paddingVertical: -50,
+  },
   tagsScrollView: {
     position: 'absolute',
     top: 90,
@@ -216,6 +231,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
     marginHorizontal: 10,
     height: CARD_HEIGHT,
     width: CARD_WIDTH
