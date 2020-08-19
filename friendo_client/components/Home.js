@@ -147,6 +147,8 @@ class Home extends Component {
           pagingEnabled
           snapToInterval={CARD_WIDTH + 25}
           snapToAlignment="center"
+          decelerationRate="fast"
+        
           style={styles.scrollView}
           contentOffset={{x:0, y:-150}}
           contentInset={{
