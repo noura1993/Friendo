@@ -1,12 +1,11 @@
 import React, { useEffect, useState, Fragment } from 'react';
-import { Text, View, ActivityIndicator, FlatList, Image, StyleSheet } from 'react-native';
-
+import { Text, View, ActivityIndicator, FlatList, Image, StyleSheet, Animated } from 'react-native';
 import { ApiUrl } from './ApiUrl';
 
 const Friendo = () => {
   const [isLoading, setLoading] = useState(true);
   const [usersList, setUsersList] = useState([]);
-  const [interests, setInterests] = useState([]);
+  const [interests, setInterests] = useState([{}]);
 
   accessAPI = (endpointName, setter) => {
     fetch(ApiUrl(endpointName))
@@ -51,7 +50,7 @@ const Friendo = () => {
                 renderItem={({ item }) => (
                   <Fragment>
 
-                    <Text>{item.name}</Text>
+                    <Text>{item.firstname}</Text>
 
                     <Image
                       style={styles.tinyLogo}
@@ -63,15 +62,7 @@ const Friendo = () => {
                   </Fragment>
                 )}
               />
-              <FlatList
-                data={interests}
-                keyExtractor={({ id }, index) => id.toString()}
-                renderItem={({ item }) => (
 
-                  <Text>{item.name}</Text>
-
-                )}
-              />
             </Fragment>
           )
       }
