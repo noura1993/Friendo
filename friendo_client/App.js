@@ -45,7 +45,7 @@ const Friendo = () => {
 
   return ( 
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="ChatTest" >
+      <Stack.Navigator initialRouteName="Friendo" >
         <Stack.Screen name="Friendo" component={WelcomePageContainer} />
         <Stack.Screen name="LogIn" component={LogIn} />
         <Stack.Screen name="SignUp" component={SignUp} /> 
