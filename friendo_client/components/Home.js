@@ -76,7 +76,7 @@ class Home extends Component {
         },
       },
       categories: [
-        { interest: 'Gaming', uri: require('../assets/gamepad.png') },
+        { interest: 'Gaming', uri: require('../assets/gamepad.png'), backgroundColor:'red' },
         { interest: 'Sport', uri: require('../assets/football.png') },
         { interest: 'Art', uri: require('../assets/gallery.png') },
         { interest: 'Gaming', uri: require('../assets/gamepad.png') },
@@ -238,6 +238,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
     marginHorizontal: 10,
+    
     // marginVertical:-100,
     
     height: CARD_HEIGHT,
