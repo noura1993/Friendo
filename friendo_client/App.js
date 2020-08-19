@@ -9,6 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 import HomePageContainer from './containers/HomePageContainer';
 import Profile from './components/Profile';
+import Chat from './components/Chat';
 
 const Stack = createStackNavigator();
 
@@ -43,11 +44,12 @@ const Friendo = () => {
 
   return ( 
     <NavigationContainer theme={DarkTheme}>
-      <Stack.Navigator initialRouteName="Friendo" >
+      <Stack.Navigator initialRouteName="Chat" >
         <Stack.Screen name="Friendo" component={WelcomePageContainer} />
         <Stack.Screen name="LogIn" component={LogIn} />
         <Stack.Screen name="SignUp" component={SignUp} /> 
         <Stack.Screen name="Profile" component={Profile} /> 
+        <Stack.Screen name="Chat" component={Chat} /> 
         <Stack.Screen name="Home" component={HomePageContainer} 
           options={({ navigation }) => ({ 
             headerLeft: null,
