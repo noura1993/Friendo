@@ -143,11 +143,15 @@ class Home extends Component {
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-          style={styles.bottomScrollView}
+          // style={styles.bottomScrollView}
           pagingEnabled
           snapToInterval={CARD_WIDTH + 25}
           snapToAlignment="center"
           decelerationRate="fast"
+          directionalLockEnabled="true"
+          disableIntervalMomentum="true"
+
+
         
           style={styles.scrollView}
           contentOffset={{x:0, y:-150}}
