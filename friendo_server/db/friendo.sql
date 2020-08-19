@@ -2,6 +2,8 @@ DROP TABLE IF EXISTS interests;
 -- DROP TABLE join_users_and_interests;
 -- DROP TABLE bookmark;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS lastSeen;
 
 
 CREATE TABLE users (
@@ -14,6 +16,22 @@ CREATE TABLE users (
   age INT,
   picture VARCHAR(255) NOT NULL /* BINARY, BYTEA ? */
 );
+
+CREATE TABLE messages (
+  id SERIAL PRIMARY KEY,
+  chatKey VARCHAR(255) NOT NULL,
+  senderEmail VARCHAR(255) NOT NULL,
+  receiverEmail VARCHAR(255) NOT NULL,
+  body TEXT NOT NULL,
+  timestamp bigint NOT NULL 
+);
+
+CREATE TABLE lastSeen (
+  chatKey VARCHAR(255) NOT NULL,
+  userEmail VARCHAR(255) NOT NULL,
+  lastSeen bigint NOT NULL 
+);
+
 
 -- CREATE TABLE bookmark (
 --   id SERIAL primary key,

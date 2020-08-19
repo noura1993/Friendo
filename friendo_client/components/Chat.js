@@ -1,53 +1,42 @@
-import React, { Component } from 'react';
-import AwesomeChat from 'react-native-awesome-chat';
-import { View, StatusBar, SafeAreaView } from 'react-native';
+import React, { Component } from 'react'
+import { GiftedChat } from 'react-native-gifted-chat'
 
 class Chat extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            messages : [
-                {body : "Hello", 
-                id : 3,
-                timestamp : 1581418856, 
-                type : "sent", 
-                image_uri : ""
-            },
-                {body : "Hi",
-                id : 5, 
-                timestamp : 1581418856,
-                type : "received",
-                image_uri : ""}
+            messages: [
+                {
+                    _id: 1,
+                    text: 'Hello developer',
+                    createdAt: 1597846591000,
+                    user: {
+                        _id: 2,
+                        name: 'React Native',
+                    }
+                }
             ]
-        }
+        };
+
+        this.onSend = this.onSend.bind(this);
     }
 
-    sendMessage = async (message) => {
-        let response = await axios.post(/*POST request to your DB*/)
-        if(response.ok){
-            return true;  
-        } else {
-            return false; //AwesomeChat will flag the message as unsent
-        }
+    onSend(messages) {
+        this.setState({ messages: messages.concat(this.state.messages) });
     }
- 
-    render(){
+
+    render() {
         return (
-        <>
-            <StatusBar barStyle="dark-content" />
-            <SafeAreaView>
-            <View style={{height : '100%'}}>
-                <AwesomeChat 
-                    onSendMessage={this.sendMessage} 
-                    messages={this.state.messages}
-                    //If new messages come in, just update this.state.messages
-                />
-            </View>
-            </SafeAreaView>
-        </>
-        );
+            <GiftedChat
+                messages={this.state.messages}
+                onSend={messages => this.onSend(messages)}
+                user={{
+                    _id: 1,
+                }}
+            />
+        )
     }
-
-};
+}
 
 export default Chat;

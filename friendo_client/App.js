@@ -4,7 +4,7 @@ import { ApiUrl } from './ApiUrl';
 import WelcomePageContainer from './containers/WelcomePageContainer';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
-import { NavigationContainer, DarkTheme } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 import HomePageContainer from './containers/HomePageContainer';
@@ -43,7 +43,7 @@ const Friendo = () => {
 
 
   return ( 
-    <NavigationContainer theme={DarkTheme}>
+    <NavigationContainer>
       <Stack.Navigator initialRouteName="Chat" >
         <Stack.Screen name="Friendo" component={WelcomePageContainer} />
         <Stack.Screen name="LogIn" component={LogIn} />
