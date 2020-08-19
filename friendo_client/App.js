@@ -37,8 +37,8 @@ const Friendo = ({ navigation }) => {
     };
     return fetch(ApiUrl(endpointName), requestOptions)
     .then((response) => {
-      console.log(response.text());
-      response.json();
+      // console.log(response.text());
+      response.text();
     })
     // .then((json) => {
     //   console.log(json);
