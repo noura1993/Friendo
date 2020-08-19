@@ -74,6 +74,31 @@ app.post("/users/:id", (req, res) => {
     })
 })
 
+app.post("/messages", (req, res) => {
+  const chatKey = req.body.senderEmail < req.body.receiverEmail ? req.body.senderEmail + '_' + req.body.receiverEmail : req.body.receiverEmail + '_' + req.body.senderEmail;
+  pool.query("INSERT INTO messages (chatKey, senderEmail, receiverEmail, senderName, receiverName, body, timestamp) VALUES ($1, $2, $3, $4, $5, $6, $7);",
+  [chatKey, req.body.senderEmail, req.body.receiverEmail, 
+    req.body.senderName, req.body.receiverName, req.body.body, req.body.timestamp],
+    (err, sqlRes) => {
+      if (err) {
+        res.json({ error: err });
+      } else {
+        res.json("ok");
+      }
+    })
+})
+
+app.get("/messages/:senderEmail/:receiverEmail", (req, res) => {
+  const chatKey = req.params.senderEmail < req.params.receiverEmail ? req.params.senderEmail + '_' + req.params.receiverEmail : req.params.receiverEmail + '_' + req.params.senderEmail;
+  pool.query("SELECT * FROM messages WHERE chatKey = $1 ORDER BY timestamp, id;", [chatKey], (err, sqlRes) => {
+    if (err) {
+      res.json({ error: err });
+    } else {
+      res.json(sqlRes.rows);
+    }
+  })
+});
+
 app.get("/interests", (req, res) => {
   basicSQLfetch(res, "interests");
 });

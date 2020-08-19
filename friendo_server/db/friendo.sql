@@ -22,6 +22,8 @@ CREATE TABLE messages (
   chatKey VARCHAR(255) NOT NULL,
   senderEmail VARCHAR(255) NOT NULL,
   receiverEmail VARCHAR(255) NOT NULL,
+  senderName VARCHAR(255) NOT NULL,
+  receiverName VARCHAR(255) NOT NULL,
   body TEXT NOT NULL,
   timestamp bigint NOT NULL 
 );
