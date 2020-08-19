@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import t from 'tcomb-form-native';
 import FriendoButton from './FriendoButton';
 import LinearGradient from 'react-native-linear-gradient';
@@ -12,28 +12,33 @@ const User = t.struct({
     lastName: t.String,
     email: t.String,
     password: t.String,
-    // confirmPassword: t.String,
-    gender: t.String,
-    age: t.Number
-    // gender: t.enums({
-    //   male: "Male",
-    //   female: "Female"
-    // }, 'gender'),
-    // age: t.enums({ 
-    //   firstSection: "18-25",
-    //   seconedSection: "25-35",
-    //   thirdSection: "35-45",
-    //   fourthSection: "45-55",
-    //   fifthSection: "55-65",
-    //   sixthSection: "65+"
-    // }, 'age')
+    confirmPassword: t.String,
+    gender: t.enums({
+      'Male': "Male",
+      'Female': "Female"
+    }, 'gender'),
+    age: t.enums({ 
+      '18-25': "18-25",
+      '25-35': "25-35",
+      '35-45': "35-45",
+      '45-55': "45-55",
+      '55-65': "55-65",
+      '65+': "65+"
+    }, 'age')
 });
 
 export default SignUp = (props) => {
   const onSubmit = () => {
     props.submitFunction(this._form.getValue());
+    // props.toLogin();
+    // props.navigation.navigate('Home');
+    // props.navigation.reset({
+    //   index: 0,
+    //   routes: [{ name: 'Home' }],
+    // });
   }
 
+  
   //render() {
     return (
       <LinearGradient
@@ -48,14 +53,11 @@ export default SignUp = (props) => {
           type={User} 
           options={options} 
         />
-         <Button
-          title="Sign Up!"
-          onPress={onSubmit}
-        />
-        {/* <FriendoButton
+        <FriendoButton
           text="Submit!"
           buttonExternalStyles={styles.buttonExtraStyle} 
-          onPressMethod={this.onSubmit} /> */}
+          onPressMethod={onSubmit} 
+          />
       </View>
       </LinearGradient>
     )

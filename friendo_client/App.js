@@ -9,10 +9,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 import HomePageContainer from './containers/HomePageContainer';
 import Profile from './components/Profile';
+import { navigationRef, navigate } from './RootNavigation';
 
 const Stack = createStackNavigator();
 
-const Friendo = () => {
+const Friendo = ({ navigation }) => {
   const [isLoading, setLoading] = useState(true);
   const [usersList, setUsersList] = useState([]);
   const [interests, setInterests] = useState([{}]);
@@ -34,15 +35,16 @@ const Friendo = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     };
-    fetch(ApiUrl(endpointName), requestOptions)
+    return fetch(ApiUrl(endpointName), requestOptions)
     .then((response) => {
       console.log(response.text());
       response.json();
     })
-    .then((json) => {
-      console.log(json);
-      //setter(json)
-    })
+    // .then((json) => {
+    //   console.log(json);
+    //   return json
+    //   //setter(json)
+    // })
     .catch((error) => console.error(error))
 //    .finally(() => setLoading(false))
   }
@@ -62,11 +64,14 @@ const Friendo = () => {
   signUpSubmit = (data) => {
     console.log("signing up with data:")
     console.log(data)
-    postAPI("users/create", data);
+    postAPI("users/create", data).then(() => {
+      navigate("Friendo")
+    })
+    .catch(console.error);
   }
   
   return ( 
-    <NavigationContainer theme={DarkTheme}>
+    <NavigationContainer ref={navigationRef} theme={DarkTheme}>
     <Stack.Navigator initialRouteName="Friendo" >
     <Stack.Screen name="Friendo" component={WelcomePageContainer} />
     <Stack.Screen name="LogIn" component={LogIn} />

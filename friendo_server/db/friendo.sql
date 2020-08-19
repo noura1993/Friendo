@@ -10,8 +10,9 @@ CREATE TABLE users (
   lastName VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL, /* ? */
+  -- confirmPassword VARCHAR(255) NOT NULL,
   gender VARCHAR(255) NOT NULL,
-  age INT,
+  age VARCHAR(255) NOT NULL,
   picture VARCHAR(255) NOT NULL /* BINARY, BYTEA ? */
 );
 
