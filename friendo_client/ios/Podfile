@@ -8,6 +8,7 @@ target 'friendo_client' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+
   target 'friendo_clientTests' do
     inherit! :complete
     # Pods for testing
