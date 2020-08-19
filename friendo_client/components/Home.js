@@ -147,6 +147,7 @@ class Home extends Component {
           snapToInterval={CARD_WIDTH + 25}
           snapToAlignment="center"
           style={styles.scrollView}
+          contentOffset={{x:0, y:-500}}
           contentInset={{
             top: 150,
             left: 0,
@@ -234,6 +235,8 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
     marginHorizontal: 10,
+    // marginVertical:-100,
+    
     height: CARD_HEIGHT,
     width: CARD_WIDTH
   },
