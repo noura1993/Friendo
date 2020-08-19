@@ -10,6 +10,7 @@ import 'react-native-gesture-handler';
 import HomePageContainer from './containers/HomePageContainer';
 import Profile from './components/Profile';
 import Chat from './components/Chat';
+import ChatTest from './components/ChatTest';
 
 const Stack = createStackNavigator();
 
@@ -44,11 +45,12 @@ const Friendo = () => {
 
   return ( 
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Chat" >
+      <Stack.Navigator initialRouteName="ChatTest" >
         <Stack.Screen name="Friendo" component={WelcomePageContainer} />
         <Stack.Screen name="LogIn" component={LogIn} />
         <Stack.Screen name="SignUp" component={SignUp} /> 
         <Stack.Screen name="Profile" component={Profile} /> 
+        <Stack.Screen name="ChatTest" component={ChatTest} /> 
         <Stack.Screen name="Chat" component={Chat} /> 
         <Stack.Screen name="Home" component={HomePageContainer} 
           options={({ navigation }) => ({ 

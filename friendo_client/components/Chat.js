@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { ApiUrl } from '../ApiUrl'
 import { GiftedChat } from 'react-native-gifted-chat'
 
 class Chat extends Component {
@@ -7,22 +8,63 @@ class Chat extends Component {
 
         this.state = {
             messages: [
-                {
-                    _id: 1,
-                    text: 'Hello developer',
-                    createdAt: 1597846591000,
-                    user: {
-                        _id: 2,
-                        name: 'React Native',
-                    }
-                }
+                // {
+                //     text: 'Hello developer',
+                //     createdAt: 1597846591000,
+                //     user: {
+                //         _id: 2,
+                //         name: 'React Native'
+                //     }
+                // }
             ]
         };
 
         this.onSend = this.onSend.bind(this);
+        this.updateMessages = this.updateMessages.bind(this);
+    }
+
+    updateMessages() {
+        fetch(ApiUrl('messages/' + this.props.route.params.senderEmail + '/' + this.props.route.params.receiverEmail))
+            .then((response) => response.json())
+            .then((json) => {
+                const newMessages = json.map((newMessage) => {
+                    return {
+                        _id: newMessage.id,
+                        text: newMessage.body,
+                        createdAt: parseInt( newMessage.timestamp),
+                        user: {
+                            name: newMessage.sendername,
+                            _id: (newMessage.receivername == this.props.route.params.receiverName) ? 1 : 2
+                        }
+                    }
+                });
+                this.setState({ messages: newMessages })
+            })
+            .catch((error) => console.error(error))
+    }
+
+    componentDidMount() {
+        this.updateMessages();
+
+        // TODO: Handle this properly
+        setInterval(() => this.updateMessages(), 500);
     }
 
     onSend(messages) {
+        fetch(ApiUrl('messages/'), {
+            method: 'POST',
+            body: JSON.stringify({
+                senderEmail: this.props.route.params.senderEmail,
+                receiverEmail: this.props.route.params.receiverEmail,
+                senderName: this.props.route.params.senderName,
+                receiverName: this.props.route.params.receiverName,
+                timestamp: new Date().getTime(),
+                body: messages[0].text
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
         this.setState({ messages: messages.concat(this.state.messages) });
     }
 

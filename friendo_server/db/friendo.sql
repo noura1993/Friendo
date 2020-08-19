@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS interests;
 -- DROP TABLE join_users_and_interests;
 -- DROP TABLE bookmark;
+DROP TABLE IF EXISTS friends;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS lastSeen;
@@ -34,6 +35,11 @@ CREATE TABLE lastSeen (
   lastSeen bigint NOT NULL 
 );
 
+CREATE TABLE friends (
+  id SERIAL PRIMARY KEY,
+  userId INT references users(id),
+  friendId INT references users(id)
+);
 
 -- CREATE TABLE bookmark (
 --   id SERIAL primary key,
@@ -66,6 +72,13 @@ INSERT INTO interests (name) VALUES ('Dancing');
 INSERT INTO interests (name) VALUES ('Rock Climbing');
 INSERT INTO interests (name) VALUES ('Hiking');
 INSERT INTO interests (name) VALUES ('Chess');
+
+INSERT INTO friends (userId, friendId) VALUES (1, 2);
+INSERT INTO friends (userId, friendId) VALUES (1, 3);
+INSERT INTO friends (userId, friendId) VALUES (2, 4);
+
+
+
 
 
 

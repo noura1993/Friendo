@@ -90,7 +90,51 @@ app.post("/messages", (req, res) => {
 
 app.get("/messages/:senderEmail/:receiverEmail", (req, res) => {
   const chatKey = req.params.senderEmail < req.params.receiverEmail ? req.params.senderEmail + '_' + req.params.receiverEmail : req.params.receiverEmail + '_' + req.params.senderEmail;
-  pool.query("SELECT * FROM messages WHERE chatKey = $1 ORDER BY timestamp, id;", [chatKey], (err, sqlRes) => {
+  pool.query("SELECT * FROM messages WHERE chatKey = $1 ORDER BY timestamp DESC, id DESC;", [chatKey], (err, sqlRes) => {
+    if (err) {
+      res.json({ error: err });
+    } else {
+      res.json(sqlRes.rows);
+    }
+  })
+});
+
+app.get("/friends/:id", (req, res) => {
+  pool.query(`SELECT friends.id,
+  firstUser.firstName AS user_first_name, 
+  firstUser.lastName As user_last_name,
+  firstUser.email AS user_email,
+  secondUser.firstName AS friend_first_name, 
+  secondUser.lastName AS friend_last_name, 
+  secondUser.email AS friend_email
+  FROM friends 
+  INNER JOIN users AS firstUser
+  ON firstUser.id = userId
+  INNER JOIN users AS secondUser
+  ON secondUser.id = friendID
+  WHERE userID = $1;`, [req.params.id], (err, sqlRes) => {
+    if (err) {
+      res.json({ error: err });
+    } else {
+      res.json(sqlRes.rows);
+    }
+  })
+});
+
+app.post("/friends", (req, res) => {
+  pool.query("INSERT INTO friends (userId, friendId) VALUES ($1, $2);",
+  [req.body.userId, req.body.friendId],
+    (err, sqlRes) => {
+      if (err) {
+        res.json({ error: err });
+      } else {
+        res.json("ok");
+      }
+    })
+})
+
+app.delete("/friends/:id", (req, res) => {
+  pool.query("DELETE FROM friends WHERE id = $1;", [req.params.id], (err, sqlRes) => {
     if (err) {
       res.json({ error: err });
     } else {
