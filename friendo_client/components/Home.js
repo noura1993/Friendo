@@ -142,6 +142,7 @@ class Home extends Component {
           horizontal
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
           style={styles.bottomScrollView}
           pagingEnabled
           snapToInterval={CARD_WIDTH + 25}
@@ -152,7 +153,7 @@ class Home extends Component {
             top: 150,
             left: 0,
             bottom: 0,
-            right: 0
+            right: 25
           }}
           
           >
