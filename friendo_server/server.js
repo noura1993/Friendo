@@ -36,14 +36,17 @@ app.get("/users", (req, res) => {
 });
 
 app.post("/users/create", (req, res) => {
+  console.log(`users create is happening with ${JSON.stringify(req.body)}`)
+
   pool.query("INSERT INTO users \
   (firstName, lastName, email, password, gender, age, picture) VALUES \
   ($1, $2, $3, $4, $5, $6, $7) \
   RETURNING id",
-  [req.body.firstname, req.body.lastname, req.body.email, 
-    req.body.password, req.body.gender, req.body.age, req.body.picture],
+  [req.body.firstName, req.body.lastName, req.body.email, 
+    req.body.password, req.body.gender, req.body.age, "https://api.adorable.io/avatars/128/" + req.body.firstName + ".png"],
     (err, sqlRes) => {
       if (err) {
+        console.log(err)
         res.json({ error: err });
       } else {
         res.json(sqlRes.rows[0].id);

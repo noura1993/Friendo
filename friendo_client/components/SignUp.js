@@ -3,55 +3,66 @@ import { View, StyleSheet } from 'react-native';
 import t from 'tcomb-form-native';
 import FriendoButton from './FriendoButton';
 import LinearGradient from 'react-native-linear-gradient';
-import { TextInput } from 'react-native-gesture-handler';
 
+import { useForm } from "react-hook-form";
 
 const Form = t.form.Form;
 
 const User = t.struct({
-  firstName: t.String,
-  lastName: t.String,
-  email: t.String,
-  password: t.String,
-  confirmPassword: t.String,
-  gender: t.enums({
-    male: "Male",
-    female: "Female"
-  }, 'gender'),
-  age: t.enums({
-    firstSection: "18-25",
-    seconedSection: "25-35",
-    thirdSection: "35-45",
-    fourthSection: "45-55",
-    fifthSection: "55-65",
-    sixthSection: "65+"
-  }, 'age')
+    firstName: t.String,
+    lastName: t.String,
+    email: t.String,
+    password: t.String,
+    confirmPassword: t.String,
+    gender: t.enums({
+      'Male': "Male",
+      'Female': "Female"
+    }, 'gender'),
+    age: t.enums({ 
+      '18-25': "18-25",
+      '25-35': "25-35",
+      '35-45': "35-45",
+      '45-55': "45-55",
+      '55-65': "55-65",
+      '65+': "65+"
+    }, 'age')
 });
 
-class SignUp extends Component {
+export default SignUp = (props) => {
+  const onSubmit = () => {
+    props.submitFunction(this._form.getValue());
+    // props.toLogin();
+    // props.navigation.navigate('Home');
+    // props.navigation.reset({
+    //   index: 0,
+    //   routes: [{ name: 'Home' }],
+    // });
+  }
 
-  render() {
+  
+  //render() {
     return (
       <LinearGradient
-        style={styles.linearGradient}
-        colors={[
-          '#668cff',
-          '#00cccc'
-        ]}>
-        <View style={styles.container}>
-          <Form
-            ref={c => this._form = c}
-            type={User}
-            options={options}
+          style={styles.linearGradient}
+          colors={[
+            '#668cff',
+            '#00cccc'
+          ]}>
+      <View style={styles.container}>
+        <Form  
+          ref={c => this._form = c}
+          type={User} 
+          options={options} 
+        />
+        <FriendoButton
+          text="Submit!"
+          buttonExternalStyles={styles.buttonExtraStyle} 
+          onPressMethod={onSubmit} 
           />
-          <FriendoButton
-            text="Submit!"
-            buttonExternalStyles={styles.buttonExtraStyle}
-            onPressMethod={this.handleSubmit} />
-        </View>
+      </View>
       </LinearGradient>
     )
-  }
+  //}
 }
 
 const styles = StyleSheet.create({
@@ -120,4 +131,4 @@ const options = {
   stylesheet: formStyles
 };
 
-export default SignUp;
+// export default SignUp;
