@@ -4,7 +4,7 @@ import t from 'tcomb-form-native';
 import FriendoButton from './FriendoButton';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 
 const Form = t.form.Form;
 
