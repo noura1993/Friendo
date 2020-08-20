@@ -10,6 +10,7 @@ const CARD_WIDTH = width * 0.8;
 class Home extends Component {
   constructor(props) {
     super(props);
+    console.log("props log", props);
     this.state = {
       userInfo: props.tabProps,
       region: {
@@ -101,9 +102,10 @@ class Home extends Component {
           style={styles.home}
           region={this.state.region}
         >
-          {this.state.markers.map((marker, index) => (
-            <Marker coordinate={marker.coordinate} key={index}>
-              <Image source={marker.image} style={{ height: 50, width: 50 }} />
+          {this.props.usersList.map((marker, index) => (
+            // console.log("YOYOWHATUP:", marker.latitude)
+            <Marker coordinate={{latitude: parseFloat(marker.latitude), longitude: parseFloat(marker.longitude)}} key={index}>
+              <Image source={{uri: marker.picture}} style={{ height: 50, width: 50, borderRadius:50 }} />
             </Marker>
           ))}
           <AnimatedRegion
@@ -139,7 +141,7 @@ class Home extends Component {
             </TouchableOpacity>
           ))}
         </ScrollView>
-        <Animated.ScrollView
+        <Animated.ScrollView //Cards
           horizontal
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator={false}
@@ -152,8 +154,7 @@ class Home extends Component {
           directionalLockEnabled="true"
           disableIntervalMomentum="true"
 
-
-
+        
           style={styles.scrollView}
           contentOffset={{ x: 0, y: -150 }}
           contentInset={{
@@ -162,23 +163,31 @@ class Home extends Component {
             bottom: 0,
             right: 25
           }}
-
-        >
-
-          {this.state.markers.map((marker, index) => (
+          
+          >
+            
+          {this.props.usersList.map((marker, index) => (
             <View style={styles.card} key={index}>
+              <TouchableOpacity style={styles.chatButton}>
+                <Text>Add Friend</Text>
+              </TouchableOpacity>
               <Image
-                source={marker.image}
+                  source={{uri: marker.picture}}
                 style={styles.cardImage}
                 resizeMode="cover"
               />
               <View style={styles.textContent}>
-                <Text>{marker.name}</Text>
-                <Text>{marker.age}</Text>
-                <Text>{marker.description}</Text>
+                <Text>{marker.firstname}</Text>
+                <Text>{marker.lastname}</Text>
+                <Text>{marker.bio}</Text>
               </View>
             </View>
           ))}
+
+            {/* <TouchableOpacity style={{backgroundColor: '#000'}}>
+                <Text>Chat</Text>
+            </TouchableOpacity> */}
+
         </Animated.ScrollView>
       </>
     );
@@ -243,20 +252,42 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
     marginHorizontal: 10,
-
     // marginVertical:-100,
-
-    height: CARD_HEIGHT,
+    flex: 2,
+    
+    height: 500,
     width: CARD_WIDTH
   },
   cardImage: {
-    width: "60%",
-    height: "60%",
-    alignSelf: "center"
+    width: 332,
+    height: 332,
+    alignSelf: "center",
+    zIndex: 0,
+    // position: "absolute",
+    borderRadius: 4,
+    // flex: 1
+   
   },
   textContent: {
     flex: 2,
-    padding: 10
+    padding: 10,
+    zIndex: 0,
+    position: "relative"
+
+  },
+  chatButton: {
+    backgroundColor: 'rgba(255,255,255, 0.7)', 
+    width: 120, 
+    height: 40,
+    marginHorizontal: 10,
+    marginVertical: 280,
+    paddingVertical: 11,
+    paddingHorizontal: 22,
+    borderRadius: 10,
+    zIndex: 1,
+    position: "absolute",
+    fontWeight: "700"
+
   }
 });
 export default Home;

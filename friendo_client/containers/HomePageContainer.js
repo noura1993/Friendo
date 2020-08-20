@@ -10,7 +10,7 @@ const HomePageContainer = (props) => {
   return (
     <NavigationContainer independent={true}>
       <Tab.Navigator initialRouteName="Home" >
-        <Tab.Screen name="Home" children={() => <Home {...props} tabProps={props.route.params} /> } />
+        <Tab.Screen name="Home" children={() => <Home {...props} tabProps={props.route.params} usersList={props.usersList} /> } />
         <Tab.Screen name="Friends" children={() => <Friends {...props} tabProps={props.route.params} /> } />
       </Tab.Navigator>
     </NavigationContainer>

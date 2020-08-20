@@ -85,7 +85,7 @@ const Friendo = ({ navigation }) => {
         <Stack.Screen name="Profile" component={Profile} /> 
         <Stack.Screen name="ChatTest" component={ChatTest} /> 
         <Stack.Screen name="Chat" component={Chat} /> 
-        <Stack.Screen name="HomePageContainer" component={HomePageContainer} 
+        <Stack.Screen name="HomePageContainer"  
           options={({ navigation }) => ({ 
             headerLeft: null,
             headerRight: () => (
@@ -94,7 +94,9 @@ const Friendo = ({ navigation }) => {
                 title="Profile"
                 color="#00cc00" /> 
           )})}
-        /> 
+        >
+          {props => (<HomePageContainer {...props} usersList={usersList}/>)}
+        </Stack.Screen>
         </Stack.Navigator>
         </NavigationContainer>
         )
