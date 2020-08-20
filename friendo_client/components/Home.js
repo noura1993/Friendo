@@ -178,9 +178,10 @@ class Home extends Component {
                 resizeMode="cover"
               />
               <View style={styles.textContent}>
-                <Text>{marker.firstname}</Text>
-                <Text>{marker.lastname}</Text>
-                <Text>{marker.bio}</Text>
+                <Text>{marker.firstname + ' ' + marker.lastname}</Text>
+                <Text>Age: {marker.age}</Text>
+                <Text>Interested in: {marker.interest}</Text>
+                <Text>Bio: {marker.bio}</Text>
               </View>
             </View>
           ))}

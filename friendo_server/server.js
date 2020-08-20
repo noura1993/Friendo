@@ -39,11 +39,11 @@ app.post("/users/create", (req, res) => {
   console.log(`users create is happening with ${JSON.stringify(req.body)}`)
 
   pool.query("INSERT INTO users \
-  (firstName, lastName, email, password, gender, age, picture, latitude, longitude, address, bio) VALUES \
-  ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) \
+  (firstName, lastName, email, password, interest, gender, age, picture, latitude, longitude, address, bio) VALUES \
+  ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) \
   RETURNING id",
   [req.body.firstName, req.body.lastName, req.body.email, 
-    req.body.password, req.body.gender, req.body.age, "https://api.adorable.io/avatars/128/" + req.body.firstName + ".png", 55.9, -3.1, "Arthur's Seat", "I don't know shit"],
+    req.body.password, req.body.interest, req.body.gender, req.body.age, "https://api.adorable.io/avatars/128/" + req.body.firstName + ".png", 55.9, -3.1, "Arthur's Seat", "I don't know shit"],
     (err, sqlRes) => {
       if (err) {
         console.log(err)
@@ -64,9 +64,10 @@ app.post("/users/:id", (req, res) => {
   gender = $5, \
   age = $6, \
   picture = $7 \
-  WHERE id = $8", 
+  picture = $8 \
+  WHERE id = $9", 
   [req.body.firstname, req.body.lastname, req.body.email, 
-    req.body.password, req.body.gender, req.body.age, req.body.picture,
+    req.body.password, req.body.gender, req.body.age, req.body.picture, req.body.interest,
     id ],
     (err, sqlRes) => {
       if (err) {

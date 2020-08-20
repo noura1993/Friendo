@@ -15,6 +15,12 @@ const User = t.struct({
   email: t.String,
   password: t.String,
   confirmPassword: t.String,
+  interest: t.enums({
+    'Gaming': "Gaming",
+    'Sport': "Sport",
+    'Art': "Art",
+    'Travelling': "Travelling"
+  }, 'gender'),
   gender: t.enums({
     'Male': "Male",
     'Female': "Female"
@@ -38,6 +44,7 @@ export default SignUp = (props) => {
       userFirstName: formValues.firstName,
       userLastName: formValues.lastName,
       userEmail: formValues.email,
+      userInterest: formValues.interest,
       userGender: formValues.gender,
       userAge: formValues.age
     });
