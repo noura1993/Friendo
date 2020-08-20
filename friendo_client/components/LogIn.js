@@ -39,7 +39,6 @@ class LogIn extends Component {
               userAge: userInfo.age,
               userPicture: userInfo.picture
             });
-            this.props.navigation.reset({index: 0});
           } else {
             alert("Incorrect email or password");
           }

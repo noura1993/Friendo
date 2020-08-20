@@ -11,9 +11,9 @@ const CARD_WIDTH = width * 0.8;
 class Home extends Component {
   constructor(props) {
     super(props);
-    console.log("props log", props);
     this.state = {
       userInfo: props.tabProps,
+      userId: 0,
       currentFriendsIds: [],
       region: {
         latitude: 55.953251,
@@ -42,6 +42,7 @@ class Home extends Component {
     this.onRegionChange = this.onRegionChange.bind(this);
     this.addFriendship = this.addFriendship.bind(this);
     this.updateFriends = this.updateFriends.bind(this);
+    this.updateUserId = this.updateUserId.bind(this);
 
     this.updateFriends();
   }
@@ -50,11 +51,32 @@ class Home extends Component {
     this.state.region.setValue(region);
   }
 
+  componentDidMount() {
+    this.updateUserId();
+    const intervalId = setInterval(() => this.updateFriends(), 500);
+    this.setState({ intervalId: intervalId});
+  }
+
+  componentWillUnmount() {
+    if (this.state.intervalId) {
+        clearInterval(this.state.intervalId);
+    }
+  }
+
+  updateUserId() {
+    fetch(ApiUrl(`user/${this.state.userInfo.userEmail}`))
+      .then((response) => response.json())
+      .then((json) => {
+        this.setState({ userId: json[0].id });
+      })
+      .catch((error) => console.error(error))
+  }
+
   addFriendship(friendId) {
     fetch(ApiUrl('friends'), {
       method: 'POST',
       body: JSON.stringify({
-        userId: this.state.userInfo.userId,
+        userId: this.state.userId,
         friendId: friendId
       }),
       headers: {
@@ -64,14 +86,13 @@ class Home extends Component {
   }
 
   updateFriends() {
-    fetch(ApiUrl(`friends/${this.state.userInfo.userId}`))
+    fetch(ApiUrl(`friends/${this.state.userId}`))
       .then((response) => response.json())
       .then((json) => {
         const currentFriendsIds = json.map((friend) => {
           return friend.friend_id
         })
         this.setState({ currentFriendsIds: currentFriendsIds });
-        console.log(this.state.currentFriendsIds);
       })
       .catch((error) => console.error(error))
   }
@@ -83,8 +104,7 @@ class Home extends Component {
           style={styles.home}
           region={this.state.region}
         >
-          {this.props.usersList.map((marker, index) => (
-            // console.log("YOYOWHATUP:", marker.latitude)
+          {this.props.usersList.filter((marker) => marker.id != this.state.userId).map((marker, index) => (
             <Marker coordinate={{ latitude: parseFloat(marker.latitude), longitude: parseFloat(marker.longitude) }} key={index}>
               <Image source={{ uri: marker.picture }} style={{ height: 50, width: 50, borderRadius: 50 }} />
             </Marker>

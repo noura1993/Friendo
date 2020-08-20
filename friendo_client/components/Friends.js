@@ -10,6 +10,8 @@ class Friends extends Component {
 
     this.state = {
       userInfo: props.tabProps,
+      userId: 0,
+      intervalId: null,
       friends: []
     }
 
@@ -19,11 +21,28 @@ class Friends extends Component {
   }
 
   componentDidMount() {
-    this.updateFriends();
+    this.updateUserId();
+    const intervalId = setInterval(() => this.updateFriends(), 500);
+    this.setState({ intervalId: intervalId});
+  }
+
+  componentWillUnmount() {
+    if (this.state.intervalId) {
+        clearInterval(this.state.intervalId);
+    }
+  }
+
+  updateUserId() {
+    fetch(ApiUrl(`user/${this.state.userInfo.userEmail}`))
+      .then((response) => response.json())
+      .then((json) => {
+        this.setState({ userId: json[0].id });
+      })
+      .catch((error) => console.error(error))
   }
 
   updateFriends() {
-    fetch(ApiUrl(`friends/${this.state.userInfo.userId}`))
+    fetch(ApiUrl(`friends/${this.state.userId}`))
       .then((response) => response.json())
       .then((json) => {
         const friends = json.map((friend) => {
