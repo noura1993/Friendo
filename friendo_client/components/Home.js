@@ -138,7 +138,7 @@ class Home extends Component {
             </TouchableOpacity>
           ))}
         </ScrollView>
-        <Animated.ScrollView
+        <Animated.ScrollView //Cards
           horizontal
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator={false}
@@ -150,7 +150,6 @@ class Home extends Component {
           decelerationRate="fast"
           directionalLockEnabled="true"
           disableIntervalMomentum="true"
-
 
         
           style={styles.scrollView}

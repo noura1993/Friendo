@@ -1,25 +1,21 @@
 DROP TABLE IF EXISTS interests;
--- DROP TABLE join_users_and_interests;
--- DROP TABLE bookmark;
 DROP TABLE IF EXISTS friends;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS lastSeen;
-
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   firstName VARCHAR(255) NOT NULL,
   lastName VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL, /* ? */
-  -- confirmPassword VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL, 
   gender VARCHAR(255) NOT NULL,
-  address TEXT,
+  address VARCHAR(255) NOT NULL,
   longitude decimal,
   latitude decimal,
   age VARCHAR(255) NOT NULL,
-  picture VARCHAR(255) NOT NULL /* BINARY, BYTEA ? */
+  picture VARCHAR(255) NOT NULL 
 );
 
 CREATE TABLE messages (
@@ -45,29 +41,16 @@ CREATE TABLE friends (
   friendId INT references users(id)
 );
 
--- CREATE TABLE bookmark (
---   id SERIAL primary key,
---   name VARCHAR(255) NOT NULL,
---   user_id INT REFERENCES user(id)
--- );
-
-
--- CREATE TABLE join_users_and_interests (
---   id SERIAL primary key,
---   user_id INT REFERENCES user(id),
---   interest_id INT references interest(id)
--- );
-
 CREATE TABLE interests (
   id SERIAL primary key,
   name VARCHAR(255) NOT NULL
 );
 
 
-INSERT INTO users (firstName, lastName, email, password, gender, age, picture) VALUES ('John', 'Cook', 'john@cook.com', 'asdf', 'Male', 23, 'https://api.adorable.io/avatars/127/John.png');
-INSERT INTO users (firstName, lastName, email, password, gender, age, picture) VALUES ('James', 'Fraser', 'james@fraser.com', 'asdf', 'Male', 33, 'https://api.adorable.io/avatars/127/James.png');
-INSERT INTO users (firstName, lastName, email, password, gender, age, picture) VALUES ('Alex', 'Jones', 'alex@jones.com', 'asdf', 'Female', 31, 'https://api.adorable.io/avatars/127/Alex.png');
-INSERT INTO users (firstName, lastName, email, password, gender, age, picture) VALUES ('Robin', 'Hood', 'robin@hood.com', 'asdf', 'Female', 24, 'https://api.adorable.io/avatars/127/Robin.png');
+INSERT INTO users (firstName, lastName, email, password, gender, address, longitude, latitude, age, picture ) VALUES ('John', 'Cook', 'john@cook.com', 'asdf', 'Male', 'Edinburgh', '55.953251', '-3.188267', '18-25', 'https://api.adorable.io/avatars/127/John.png');
+INSERT INTO users (firstName, lastName, email, password, gender, address, longitude, latitude, age, picture ) VALUES ('James', 'Fraser', 'james@fraser.com', 'asdf', 'Male', 'Edinburgh', '55.963251', '-3.158267', '18-25', 'https://api.adorable.io/avatars/127/James.png');
+INSERT INTO users (firstName, lastName, email, password, gender, address, longitude, latitude, age, picture ) VALUES ('Alex', 'Jones', 'alex@jones.com', 'asdf', 'Female', 'Edinburgh', '55.973251', '-3.168267', '18-25', 'https://api.adorable.io/avatars/127/Alex.png');
+INSERT INTO users (firstName, lastName, email, password, gender, address, longitude, latitude, age, picture ) VALUES ('Robin', 'Hood', 'robin@hood.com', 'asdf', 'Female', 'Edinburgh', '55.963251', '-3.188267', '18-25', 'https://api.adorable.io/avatars/127/Robin.png');
 
 
 INSERT INTO interests (name) VALUES ('Gaming');

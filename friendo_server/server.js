@@ -39,11 +39,11 @@ app.post("/users/create", (req, res) => {
   console.log(`users create is happening with ${JSON.stringify(req.body)}`)
 
   pool.query("INSERT INTO users \
-  (firstName, lastName, email, password, gender, age, picture) VALUES \
-  ($1, $2, $3, $4, $5, $6, $7) \
+  (firstName, lastName, email, password, gender, age, picture, latitude, longitude, address) VALUES \
+  ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) \
   RETURNING id",
   [req.body.firstName, req.body.lastName, req.body.email, 
-    req.body.password, req.body.gender, req.body.age, "https://api.adorable.io/avatars/128/" + req.body.firstName + ".png"],
+    req.body.password, req.body.gender, req.body.age, "https://api.adorable.io/avatars/128/" + req.body.firstName + ".png", 55.9, -3.1, "Arthur's Seat"],
     (err, sqlRes) => {
       if (err) {
         console.log(err)
