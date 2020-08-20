@@ -92,7 +92,7 @@ app.post("/messages", (req, res) => {
 })
 
 app.get("/user/:email", (req, res) => {
-  pool.query("SELECT * From users WHERE email = $1;", [req.params.email], (err, sqlRes) => {
+  pool.query("SELECT * From users WHERE lower(email) = $1;", [req.params.email.toLowerCase()], (err, sqlRes) => {
     console.log(req.params.email)
     if (err) {
       res.json({ error: err });
