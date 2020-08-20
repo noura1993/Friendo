@@ -167,7 +167,7 @@ class Home extends Component {
 
         >
 
-          {this.props.usersList.map((marker, index) => (
+          {this.props.usersList.filter((marker) => marker.id != this.state.userId).map((marker, index) => (
             <View style={styles.card} key={index}>
               <TouchableOpacity style={[styles.chatButton, {backgroundColor: this.state.currentFriendsIds.includes(marker.id) ? "rgba(255,255,255, 0.7)" : "#668cff"}]} disabled={this.state.currentFriendsIds.includes(marker.id)} onPress={() => this.addFriendship(marker.id)}>
                 <Text>{this.state.currentFriendsIds.includes(marker.id) ? "Friend" : "Add Friend"}</Text>
