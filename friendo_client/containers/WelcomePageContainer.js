@@ -16,7 +16,7 @@ class WelcomePageContainer extends Component {
   }
 
   signupHideAndShow() {
-    this.props.navigation.navigate('SignUp');
+    this.props.navigation.navigate('AddressFinder');
   }
 
   render() {
@@ -38,8 +38,9 @@ class WelcomePageContainer extends Component {
               <FriendoButton
                   text="Sign Up"
                   buttonExternalStyles={styles.buttonExtraStyle}
-                  onPressMethod={this.signupHideAndShow}
-              />
+                  onPressMethod={this.signupHideAndShow}>
+                    {props => <SignUp {...props} toLogin={loginHideAndShow}/>}
+              </FriendoButton>
             </View>
       </LinearGradient >
     );
