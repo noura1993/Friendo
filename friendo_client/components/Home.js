@@ -274,7 +274,6 @@ const styles = StyleSheet.create({
     padding: 10,
     zIndex: 0,
     position: "relative"
-
   },
   chatButton: {
     backgroundColor: 'rgba(255,255,255, 0.7)',
