@@ -25,7 +25,6 @@ const Friendo = ({ navigation }) => {
     fetch(ApiUrl(endpointName))
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         setter(json)
       })
       .catch((error) => console.error(error))
@@ -40,16 +39,9 @@ const Friendo = ({ navigation }) => {
     };
     return fetch(ApiUrl(endpointName), requestOptions)
       .then((response) => {
-        // console.log(response.text());
         response.text();
       })
-      // .then((json) => {
-      //   console.log(json);
-      //   return json
-      //   //setter(json)
-      // })
       .catch((error) => console.error(error))
-    //    .finally(() => setLoading(false))
   }
 
   useEffect(() => {
@@ -65,8 +57,6 @@ const Friendo = ({ navigation }) => {
   });
 
   signUpSubmit = (data) => {
-    console.log("signing up with data:")
-    console.log(data)
     postAPI("users/create", data).then(() => {
       navigate("Friendo")
     })

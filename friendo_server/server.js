@@ -46,8 +46,6 @@ app.get("/usersByInterest/:interest", (req, res) => {
 });
 
 app.post("/users/create", (req, res) => {
-  console.log(`users create is happening with ${JSON.stringify(req.body)}`)
-
   pool.query("INSERT INTO users \
   (firstName, lastName, email, password, interest, gender, age, picture, latitude, longitude, address, bio) VALUES \
   ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) \

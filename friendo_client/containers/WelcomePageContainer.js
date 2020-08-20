@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   buttonExtraStyle: {
     width: '30%',
-    top: 50
+    top: 80
   },
   linearGradient: {
     flex: 1
