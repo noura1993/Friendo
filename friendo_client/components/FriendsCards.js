@@ -12,7 +12,7 @@ class FriendsCards extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userId: 1,
+            userId: 0,
             currentFriendsIds: [],
             intervalId: null
         }

@@ -74,7 +74,7 @@ const Friendo = ({ navigation }) => {
   }
 
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={DarkTheme}>
       <Stack.Navigator initialRouteName="Friendo" >
         <Stack.Screen name="Friendo" component={WelcomePageContainer} />
         <Stack.Screen name="LogIn" component={LogIn} />

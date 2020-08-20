@@ -80,6 +80,11 @@ class Chat extends Component {
         return (
             <GiftedChat
                 messages={this.state.messages}
+                listViewProps={{
+                    style: {
+                      backgroundColor: 'white',
+                    },
+                  }}
                 onSend={messages => this.onSend(messages)}
                 user={{
                     _id: 1,
