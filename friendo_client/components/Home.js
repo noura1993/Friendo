@@ -11,6 +11,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userInfo: props.tabProps,
       region: {
         latitude: 55.953251,
         longitude: -3.188267,
@@ -76,7 +77,7 @@ class Home extends Component {
         },
       },
       categories: [
-        { interest: 'Gaming', uri: require('../assets/gamepad.png'), backgroundColor:'red' },
+        { interest: 'Gaming', uri: require('../assets/gamepad.png'), backgroundColor: 'red' },
         { interest: 'Sport', uri: require('../assets/football.png') },
         { interest: 'Art', uri: require('../assets/gallery.png') },
         { interest: 'Gaming', uri: require('../assets/gamepad.png') },
@@ -152,18 +153,18 @@ class Home extends Component {
           disableIntervalMomentum="true"
 
 
-        
+
           style={styles.scrollView}
-          contentOffset={{x:0, y:-150}}
+          contentOffset={{ x: 0, y: -150 }}
           contentInset={{
             top: 150,
             left: 0,
             bottom: 0,
             right: 25
           }}
-          
-          >
-            
+
+        >
+
           {this.state.markers.map((marker, index) => (
             <View style={styles.card} key={index}>
               <Image
@@ -202,7 +203,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     position: 'absolute',
-    bottom:0,
+    bottom: 0,
     paddingHorizontal: 10,
     paddingVertical: -50,
   },
@@ -242,9 +243,9 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
     marginHorizontal: 10,
-    
+
     // marginVertical:-100,
-    
+
     height: CARD_HEIGHT,
     width: CARD_WIDTH
   },
