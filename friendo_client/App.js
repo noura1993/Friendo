@@ -85,13 +85,13 @@ const Friendo = ({ navigation }) => {
         <Stack.Screen name="Profile" component={Profile} /> 
         <Stack.Screen name="ChatTest" component={ChatTest} /> 
         <Stack.Screen name="Chat" component={Chat} /> 
-        <Stack.Screen name="HomePageContainer"  
+        <Stack.Screen name="Home"  
           options={({ navigation }) => ({ 
             headerLeft: null,
             headerRight: () => (
               <Button
                 onPress={() => navigation.navigate('Profile')}
-                title="Profile"
+                title="Sign out?"
                 color="#00cc00" /> 
           )})}
         >

@@ -30,7 +30,7 @@ class LogIn extends Component {
         if (json.length > 0) {
           const userInfo = json[0];
           if (userInfo.password === formData.password) {
-            this.props.navigation.navigate('HomePageContainer', {
+            this.props.navigation.navigate('Home', {
               userId: userInfo.id,
               userFirstName: userInfo.firstname,
               userLastName: userInfo.lastname,
@@ -39,7 +39,7 @@ class LogIn extends Component {
               userAge: userInfo.age,
               userPicture: userInfo.picture
             });
-            this.props.navigation.reset({index: 0});
+            // this.props.navigation.reset({index: 0});
           } else {
             alert("Incorrect email or password");
           }

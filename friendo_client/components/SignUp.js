@@ -34,7 +34,7 @@ export default SignUp = (props) => {
     props.navigation.navigate('HomePageContainer');
     props.navigation.reset({
       index: 0,
-      routes: [{ name: 'HomePageContainer' }],
+      // routes: [{ name: 'HomePageContainer' }],
     });
   }
 
