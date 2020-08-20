@@ -29,7 +29,7 @@ class WelcomePageContainer extends Component {
             '#668cff',
             '#00cccc',
           ]}>
-            <Image source={require('../assets/logo.jpg')} style={styles.logo}/>
+            <Image source={require('../assets/oldlogo.png')} style={styles.logo}/>
             <Text style={styles.logoName}>Friendo</Text>
             <View style={styles.welcomePageContainer}> 
               <FriendoButton
@@ -51,9 +51,9 @@ class WelcomePageContainer extends Component {
 
 const styles = StyleSheet.create({
   logo: {
-    margin: '16%',
-    marginLeft: '19%',
-    width: '50%', 
+    // margin: '16%',
+    // marginLeft: '19%',
+    width: '56%', 
     flex:1,
     zIndex:1,
     alignSelf: "center",
