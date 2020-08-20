@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {View, StyleSheet} from 'react-native';
+import React, { Component } from 'react';
+import { View, StyleSheet } from 'react-native';
 import t from 'tcomb-form-native';
 import FriendoButton from './FriendoButton';
 import LinearGradient from 'react-native-linear-gradient';
@@ -23,37 +23,55 @@ class LogIn extends Component {
     const formData = this.refs.form.getValue();
     if (!formData) return;
     // TODO: fetch authentication from backend
-    if(formData.email === 'Admin' && formData.password === "123") {
-      this.props.navigation.navigate('Home');
-      this.props.navigation.reset({
-        index: 0,
-        routes: [{ name: 'Home' }],
-      });
-    } else {
-      alert('Incorrect email or password');
-    }
+    fetch(ApiUrl(`user/${formData.email}`))
+      .then((response) => response.json())
+      .then((json) => {
+        if (json.length > 0) {
+          const userInfo = json[0];
+          if (userInfo.password === formData.password) {
+            this.props.navigation.navigate('Home', {
+              userId: userInfo.id,
+              userFirstName: userInfo.firstname,
+              userLastName: userInfo.lastname,
+              userEmail: userInfo.email,
+              userGender: userInfo.gender,
+              userAge: userInfo.age,
+              userPicture: userInfo.picture
+            });
+            this.props.navigation.reset({
+              index: 0,
+              routes: [{ name: 'Home' }],
+            });
+          } else {
+            alert("Incorrect email or password");
+          }
+        } else {
+          alert("Incorrect email");
+        }
+      })
+      .catch((error) => console.error(error))
   }
 
   render() {
     return (
       <LinearGradient
-      style={styles.linearGradient}
-      colors={[
-        '#ff6666',
-        '#df80ff'
-      ]}>
-      <View style={styles.container}>
-        <Form 
-          ref='form'
-          type={User}
-          options={options} 
-        />   
-        <FriendoButton
-          text="Log In!"
-          buttonExternalStyles={styles.buttonExtraStyle}
-          onPressMethod={this.handleLogIn}
-        />
-      </View>
+        style={styles.linearGradient}
+        colors={[
+          '#ff6666',
+          '#df80ff'
+        ]}>
+        <View style={styles.container}>
+          <Form
+            ref='form'
+            type={User}
+            options={options}
+          />
+          <FriendoButton
+            text="Log In!"
+            buttonExternalStyles={styles.buttonExtraStyle}
+            onPressMethod={this.handleLogIn}
+          />
+        </View>
       </LinearGradient >
     );
   }
@@ -102,15 +120,15 @@ const formStyles = {
       backgroundColor: 'white'
     },
     error: {
-        color: 'black',
-        height: 32,
-        padding: 7,
-        borderRadius: 4,
-        borderWidth: 0,
-        marginBottom: 5,
-        borderWidth: 1,
-        borderColor: 'white',
-        backgroundColor: 'white'
+      color: 'black',
+      height: 32,
+      padding: 7,
+      borderRadius: 4,
+      borderWidth: 0,
+      marginBottom: 5,
+      borderWidth: 1,
+      borderColor: 'white',
+      backgroundColor: 'white'
     }
   }
 };
