@@ -14,6 +14,7 @@ class Home extends Component {
     console.log("props log", props);
     this.state = {
       userInfo: props.tabProps,
+      currentFriendsIds: [],
       region: {
         latitude: 55.953251,
         longitude: -3.188267,
@@ -40,6 +41,9 @@ class Home extends Component {
 
     this.onRegionChange = this.onRegionChange.bind(this);
     this.addFriendship = this.addFriendship.bind(this);
+    this.updateFriends = this.updateFriends.bind(this);
+
+    this.updateFriends();
   }
 
   onRegionChange(region) {
@@ -50,15 +54,27 @@ class Home extends Component {
     fetch(ApiUrl('friends'), {
       method: 'POST',
       body: JSON.stringify({
-          userId: this.state.userInfo.userId,
-          friendId: friendId
+        userId: this.state.userInfo.userId,
+        friendId: friendId
       }),
       headers: {
-          'Content-Type': 'application/json'
+        'Content-Type': 'application/json'
       }
-    })
+    }).then(() => this.updateFriends())
   }
 
+  updateFriends() {
+    fetch(ApiUrl(`friends/${this.state.userInfo.userId}`))
+      .then((response) => response.json())
+      .then((json) => {
+        const currentFriendsIds = json.map((friend) => {
+          return friend.friend_id
+        })
+        this.setState({ currentFriendsIds: currentFriendsIds });
+        console.log(this.state.currentFriendsIds);
+      })
+      .catch((error) => console.error(error))
+  }
 
   render() {
     return (
@@ -69,8 +85,8 @@ class Home extends Component {
         >
           {this.props.usersList.map((marker, index) => (
             // console.log("YOYOWHATUP:", marker.latitude)
-            <Marker coordinate={{latitude: parseFloat(marker.latitude), longitude: parseFloat(marker.longitude)}} key={index}>
-              <Image source={{uri: marker.picture}} style={{ height: 50, width: 50, borderRadius:50 }} />
+            <Marker coordinate={{ latitude: parseFloat(marker.latitude), longitude: parseFloat(marker.longitude) }} key={index}>
+              <Image source={{ uri: marker.picture }} style={{ height: 50, width: 50, borderRadius: 50 }} />
             </Marker>
           ))}
           <AnimatedRegion
@@ -119,7 +135,7 @@ class Home extends Component {
           directionalLockEnabled="true"
           disableIntervalMomentum="true"
 
-        
+
           style={styles.scrollView}
           contentOffset={{ x: 0, y: -150 }}
           contentInset={{
@@ -128,16 +144,16 @@ class Home extends Component {
             bottom: 0,
             right: 25
           }}
-          
-          >
-            
+
+        >
+
           {this.props.usersList.map((marker, index) => (
             <View style={styles.card} key={index}>
-              <TouchableOpacity style={styles.chatButton} onPress={() => this.addFriendship(marker.id)}>
-                <Text>Add Friend</Text>
+              <TouchableOpacity style={[styles.chatButton, {backgroundColor: this.state.currentFriendsIds.includes(marker.id) ? "rgba(255,255,255, 0.7)" : "#668cff"}]} disabled={this.state.currentFriendsIds.includes(marker.id)} onPress={() => this.addFriendship(marker.id)}>
+                <Text>{this.state.currentFriendsIds.includes(marker.id) ? "Friend" : "Add Friend"}</Text>
               </TouchableOpacity>
               <Image
-                  source={{uri: marker.picture}}
+                source={{ uri: marker.picture }}
                 style={styles.cardImage}
                 resizeMode="cover"
               />
@@ -149,7 +165,7 @@ class Home extends Component {
             </View>
           ))}
 
-            {/* <TouchableOpacity style={{backgroundColor: '#000'}}>
+          {/* <TouchableOpacity style={{backgroundColor: '#000'}}>
                 <Text>Chat</Text>
             </TouchableOpacity> */}
 
@@ -219,7 +235,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     // marginVertical:-100,
     flex: 2,
-    
+
     height: 500,
     width: CARD_WIDTH
   },
@@ -231,7 +247,7 @@ const styles = StyleSheet.create({
     // position: "absolute",
     borderRadius: 4,
     // flex: 1
-   
+
   },
   textContent: {
     flex: 2,
@@ -241,8 +257,8 @@ const styles = StyleSheet.create({
 
   },
   chatButton: {
-    backgroundColor: 'rgba(255,255,255, 0.7)', 
-    width: 120, 
+    backgroundColor: 'rgba(255,255,255, 0.7)',
+    width: 120,
     height: 40,
     marginHorizontal: 10,
     marginVertical: 280,

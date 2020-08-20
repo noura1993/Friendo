@@ -120,7 +120,8 @@ app.get("/friends/:id", (req, res) => {
   secondUser.firstName AS friend_first_name, 
   secondUser.lastName AS friend_last_name, 
   secondUser.email AS friend_email,
-  secondUser.picture AS friend_picture
+  secondUser.picture AS friend_picture,
+  secondUser.id AS friend_id
   FROM friends 
   INNER JOIN users AS firstUser
   ON firstUser.id = userId
