@@ -78,14 +78,10 @@ const Friendo = ({ navigation }) => {
       <Stack.Navigator initialRouteName="Friendo" >
         <Stack.Screen name="Friendo" component={WelcomePageContainer} />
         <Stack.Screen name="LogIn" component={LogIn} />
-<<<<<<< HEAD
         <Stack.Screen name="AddressFinder" component={AddressFinder} /> 
-        <Stack.Screen name="SignUp" component={SignUp} /> 
-=======
         <Stack.Screen name="SignUp">
           {props => <SignUp {...props} submitFunction={signUpSubmit} propTest="prop passing working"/>}
         </Stack.Screen>
->>>>>>> ff0a4f31132d8c64a6d3846120a764f645d59949
         <Stack.Screen name="Profile" component={Profile} /> 
         <Stack.Screen name="ChatTest" component={ChatTest} /> 
         <Stack.Screen name="Chat" component={Chat} /> 
