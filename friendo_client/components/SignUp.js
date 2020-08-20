@@ -25,8 +25,7 @@ const User = t.struct({
     fourthSection: "45-55",
     fifthSection: "55-65",
     sixthSection: "65+"
-  }, 'age'),
-  address: t.String
+  }, 'age')
 });
 
 class SignUp extends Component {
@@ -45,10 +44,6 @@ class SignUp extends Component {
             type={User}
             options={options}
           />
-          <FriendoButton
-            text="Find address!"
-            buttonExternalStyles={styles.buttonExtraStyle}
-            onPressMethod={() => this.props.navigation.navigate('AddressFinder')} />
           <FriendoButton
             text="Submit!"
             buttonExternalStyles={styles.buttonExtraStyle}

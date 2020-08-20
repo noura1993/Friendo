@@ -9,6 +9,7 @@ class AddressFinder extends Component {
 
         this.state = {
             search: "",
+            isValid: false,
             region: {
                 latitude: 55.953251,
                 longitude: -3.188267,
@@ -22,13 +23,18 @@ class AddressFinder extends Component {
                 searchIcon: {
                     uri: require("../assets/search.png")
                 },
+                nextIcon: {
+                    uri: require("../assets/next.png")
+                }
             }
         }
 
         this.findLocation = this.findLocation.bind(this);
+        this.goToSignup = this.goToSignup.bind(this);
     }
 
     findLocation() {
+        this.setState({ isValid: false });
         fetch(`https://us1.locationiq.com/v1/search.php?key=pk.6ce4a2cf52c0d9c2ff40a496f6f66158&q=${this.state.search}&format=json`)
             .then((response) => response.json())
             .then((json) => {
@@ -41,13 +47,26 @@ class AddressFinder extends Component {
                             longitude: parseFloat(lon),
                             latitudeDelta: 0.0922,
                             longitudeDelta: 0.0421,
-                        }
+                        },
+                        isValid: true
                     })
                 } else {
                     alert("Couldn't find any matches for this address");
                 }
             })
             .catch((error) => console.error(error))
+    }
+
+    goToSignup() {
+        if (!this.state.isValid) {
+            alert("Please search for a valid place first");
+        } else {
+            this.props.navigation.navigate('SignUp', {
+                address: this.state.search,
+                longitude: this.state.region.longitude,
+                latitude: this.state.region.latitude
+            })
+        }
     }
 
     render() {
@@ -57,6 +76,10 @@ class AddressFinder extends Component {
                     style={styles.home}
                     region={this.state.region}
                 >
+                    {!this.state.isValid ? null : 
+                    <Marker coordinate={this.state.region}>
+                        <Image source={this.state.icons.logo.uri} style={{ height: 50, width: 50 }} />
+                    </Marker>}
                     <AnimatedRegion
                         region={this.state.region}
                         onRegionChange={this.onRegionChange}
@@ -72,6 +95,9 @@ class AddressFinder extends Component {
                     />
                     <TouchableOpacity activeOpacity={.5} onPress={this.findLocation}>
                         <Image source={this.state.icons.searchIcon.uri} style={{ height: 25, width: 25 }} />
+                    </TouchableOpacity>
+                    <TouchableOpacity activeOpacity={.5} onPress={this.goToSignup}>
+                        <Image source={this.state.icons.nextIcon.uri} style={{ height: 25, width: 25 }} />
                     </TouchableOpacity>
                 </View>
             </>
