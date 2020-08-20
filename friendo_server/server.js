@@ -35,6 +35,17 @@ app.get("/users", (req, res) => {
   basicSQLfetch(res, "users");
 });
 
+app.get("/usersByInterest/:interest", (req, res) => {
+  console.log(req.params.interest)
+  pool.query("SELECT * FROM users WHERE lower(interest) = $1;", [req.params.interest.toLowerCase()], (err, sqlRes) => {
+    if (err) {
+      res.json({ error: err });
+    } else {
+      res.json(sqlRes.rows);
+    }
+  })
+});
+
 app.post("/users/create", (req, res) => {
   console.log(`users create is happening with ${JSON.stringify(req.body)}`)
 

@@ -16,6 +16,7 @@ class Home extends Component {
       search: "",
       userInfo: props.tabProps,
       userId: 0,
+      usersList: [],
       currentFriendsIds: [],
       region: {
         latitude: 55.953251,
@@ -32,24 +33,36 @@ class Home extends Component {
         },
       },
       categories: [
-        { interest: 'Gaming', uri: require('../assets/gamepad.png'), backgroundColor: 'red' },
-        { interest: 'Sport', uri: require('../assets/football.png') },
-        { interest: 'Art', uri: require('../assets/gallery.png') },
+        { interest: 'ALL', uri: require('../assets/all.png') },
         { interest: 'Gaming', uri: require('../assets/gamepad.png') },
         { interest: 'Sport', uri: require('../assets/football.png') },
         { interest: 'Art', uri: require('../assets/gallery.png') },
+        { interest: 'Travelling', uri: require('../assets/travelling.png') }
       ]
     }
 
     this.onRegionChange = this.onRegionChange.bind(this);
     this.updateUserId = this.updateUserId.bind(this);
     this.findLocation = this.findLocation.bind(this);
+    this.getUsersByIntrest = this.getUsersByIntrest.bind(this);
 
     this.updateUserId();
   }
 
+  componentDidMount() {
+    this.setState( {usersList: this.props.usersList});
+  }
+
+  getUsersByIntrest(category) {
+    fetch(ApiUrl(category.interest === 'ALL' ? 'users/' : `usersByInterest/${category.interest}`))
+      .then((response) => response.json())
+      .then((json) => {
+        this.setState({ usersList: json });
+      })
+      .catch((error) => console.error(error))
+  }
+
   findLocation() {
-    this.setState({ isValid: false });
     fetch(`https://us1.locationiq.com/v1/search.php?key=pk.6ce4a2cf52c0d9c2ff40a496f6f66158&q=${this.state.search}&format=json`)
       .then((response) => response.json())
       .then((json) => {
@@ -95,7 +108,7 @@ class Home extends Component {
           region={this.state.region}
         // onRegionChange={this.onRegionChange}
         >
-          {this.props.usersList.filter((marker) => marker.id != this.state.userId).map((marker, index) => (
+          {this.state.usersList.filter((marker) => marker.id != this.state.userId).map((marker, index) => (
             <Marker coordinate={{ latitude: parseFloat(marker.latitude), longitude: parseFloat(marker.longitude) }} key={index}>
               <Image source={{ uri: marker.picture }} style={{ height: 50, width: 50, borderRadius: 50 }} />
             </Marker>
@@ -129,7 +142,7 @@ class Home extends Component {
           }}
         >
           {this.state.categories.map((category, index) => (
-            <TouchableOpacity key={index} style={styles.tagsItem}>
+            <TouchableOpacity key={index} style={styles.tagsItem} onPress={() => this.getUsersByIntrest(category)}>
               <Image style={styles.iconStyle} source={category.uri} />
               <Text>{category.interest}</Text>
             </TouchableOpacity>
@@ -158,7 +171,7 @@ class Home extends Component {
             right: 25
           }}
         >
-          <FriendsCards userId={this.state.userId} userInfo={this.state.userInfo} usersList={this.props.usersList}></FriendsCards>
+          <FriendsCards userId={this.state.userId} userInfo={this.state.userInfo} usersList={this.state.usersList}></FriendsCards>
         </Animated.ScrollView>
       </>
     );
