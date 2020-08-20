@@ -31,10 +31,10 @@ const User = t.struct({
 export default SignUp = (props) => {
   const onSubmit = () => {
     props.submitFunction(this._form.getValue());
-    props.navigation.navigate('Home');
+    props.navigation.navigate('HomePageContainer');
     props.navigation.reset({
       index: 0,
-      routes: [{ name: 'Home' }],
+      routes: [{ name: 'HomePageContainer' }],
     });
   }
 
