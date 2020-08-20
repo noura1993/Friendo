@@ -101,8 +101,5 @@ const Friendo = ({ navigation }) => {
         </NavigationContainer>
         )
       }
-      
-      export default Friendo;
-      
-      
-      
+
+export default Friendo;
