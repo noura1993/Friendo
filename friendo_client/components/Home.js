@@ -166,6 +166,9 @@ class Home extends Component {
             
           {this.props.usersList.map((marker, index) => (
             <View style={styles.card} key={index}>
+              <TouchableOpacity style={styles.chatButton}>
+                <Text>Add Friend</Text>
+              </TouchableOpacity>
               <Image
                   source={{uri: marker.picture}}
                 style={{width: 332, height: 332}}
@@ -177,6 +180,11 @@ class Home extends Component {
               </View>
             </View>
           ))}
+
+            {/* <TouchableOpacity style={{backgroundColor: '#000'}}>
+                <Text>Chat</Text>
+            </TouchableOpacity> */}
+
         </Animated.ScrollView>
       </>
     );
@@ -250,11 +258,27 @@ const styles = StyleSheet.create({
   cardImage: {
     width: "60%",
     height: "60%",
-    alignSelf: "center"
+    alignSelf: "center",
+    zIndex: 0,
+    position: "absolute"
   },
   textContent: {
     flex: 2,
     padding: 10
+  },
+  chatButton: {
+    backgroundColor: 'rgba(255,255,255, 0.7)', 
+    width: 120, 
+    height: 40,
+    marginHorizontal: 10,
+    marginVertical: 280,
+    paddingVertical: 11,
+    paddingHorizontal: 22,
+    borderRadius: 10,
+    zIndex: 1,
+    position: "absolute",
+    fontWeight: "700"
+
   }
 });
 export default Home;
