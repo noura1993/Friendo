@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ApiUrl } from '../ApiUrl'
 import { Text, View, StyleSheet, Image, TextInput, ScrollView, TouchableOpacity, Dimensions, Animated } from 'react-native';
 import MapView, { Marker, Animated as AnimatedRegion } from 'react-native-maps';
+import FriendsCards from './FriendsCards';
 
 
 const { width, height } = Dimensions.get("window");
@@ -40,61 +41,24 @@ class Home extends Component {
     }
 
     this.onRegionChange = this.onRegionChange.bind(this);
-    this.addFriendship = this.addFriendship.bind(this);
-    this.updateFriends = this.updateFriends.bind(this);
     this.updateUserId = this.updateUserId.bind(this);
 
-    this.updateFriends();
+    this.updateUserId();
   }
 
   onRegionChange(region) {
     this.setState({ region: region });
   }
 
-  componentDidMount() {
-    this.updateFriends();
-  }
-
   updateUserId() {
     fetch(ApiUrl(`user/${this.state.userInfo.userEmail}`))
       .then((response) => response.json())
       .then((json) => {
-        this.setState({ userId: json[0].id });
+        if (json.length > 0) {
+          this.setState({ userId: json[0].id });
+        }
       })
       .catch((error) => console.error(error))
-  }
-
-  addFriendship(friendId) {
-    fetch(ApiUrl('friends'), {
-      method: 'POST',
-      body: JSON.stringify({
-        userId: this.state.userId,
-        friendId: friendId
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(() => this.updateFriends())
-  }
-
-  updateFriends() {
-    fetch(ApiUrl(`user/${this.state.userInfo.userEmail}`))
-      .then((response) => response.json())
-      .then((json) => {
-        this.setState({ userId: json[0].id });
-      })
-      .catch((error) => console.error(error))
-      .then(ignored => {
-        fetch(ApiUrl(`friends/${this.state.userId}`))
-          .then((response) => response.json())
-          .then((json) => {
-            const currentFriendsIds = json.map((friend) => {
-              return friend.friend_id
-            });
-            this.setState({ currentFriendsIds: currentFriendsIds });
-          })
-          .catch((error) => console.error(error))
-      })
   }
 
   render() {
@@ -167,24 +131,7 @@ class Home extends Component {
 
         >
 
-          {this.props.usersList.filter((marker) => marker.id != this.state.userId).map((marker, index) => (
-            <View style={styles.card} key={index}>
-              <TouchableOpacity style={[styles.chatButton, { backgroundColor: this.state.currentFriendsIds.includes(marker.id) ? "rgba(255,255,255, 0.7)" : "#668cff" }]} disabled={this.state.currentFriendsIds.includes(marker.id)} onPress={() => this.addFriendship(marker.id)}>
-                <Text>{this.state.currentFriendsIds.includes(marker.id) ? "Friend" : "Add Friend"}</Text>
-              </TouchableOpacity>
-              <Image
-                source={{ uri: marker.picture }}
-                style={styles.cardImage}
-                resizeMode="cover"
-              />
-              <View style={styles.textContent}>
-                <Text>{marker.firstname + ' ' + marker.lastname}</Text>
-                <Text>Age: {marker.age}</Text>
-                <Text>Interested in: {marker.interest}</Text>
-                <Text>Bio: {marker.bio}</Text>
-              </View>
-            </View>
-          ))}
+          <FriendsCards userId={this.state.userId} userInfo={this.state.userInfo} usersList={this.props.usersList}></FriendsCards>
 
           {/* <TouchableOpacity style={{backgroundColor: '#000'}}>
                 <Text>Chat</Text>
