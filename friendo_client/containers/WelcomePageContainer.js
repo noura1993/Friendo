@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 40,
     alignSelf: "center",
-    marginTop: 1
+    marginTop: 1,
+    fontWeight: 'bold'
   },
   welcomePageContainer: {
     flex: 1,

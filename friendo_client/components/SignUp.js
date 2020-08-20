@@ -37,6 +37,7 @@ const User = t.struct({
 
 export default SignUp = (props) => {
   const onSubmit = () => {
+    if (!this._form.getValue()) return;
     props.submitFunction(this._form.getValue());
 
     const formValues = this._form.getValue();
