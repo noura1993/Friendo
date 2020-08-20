@@ -13,6 +13,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      search: "",
       userInfo: props.tabProps,
       userId: 0,
       currentFriendsIds: [],
@@ -42,8 +43,33 @@ class Home extends Component {
 
     this.onRegionChange = this.onRegionChange.bind(this);
     this.updateUserId = this.updateUserId.bind(this);
+    this.findLocation = this.findLocation.bind(this);
 
     this.updateUserId();
+  }
+
+  findLocation() {
+    this.setState({ isValid: false });
+    fetch(`https://us1.locationiq.com/v1/search.php?key=pk.6ce4a2cf52c0d9c2ff40a496f6f66158&q=${this.state.search}&format=json`)
+      .then((response) => response.json())
+      .then((json) => {
+        if (json.length > 0) {
+          let lat = json[0].lat;
+          let lon = json[0].lon;
+          this.setState({
+            region: {
+              latitude: parseFloat(lat),
+              longitude: parseFloat(lon),
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            },
+            isValid: true
+          })
+        } else {
+          alert("Couldn't find any matches for this address");
+        }
+      })
+      .catch((error) => console.error(error))
   }
 
   onRegionChange(region) {
@@ -83,9 +109,12 @@ class Home extends Component {
             placeholder="Search here"
             placeholderTextColor="#000"
             autoCapitalize="none"
+            onChangeText={(search) => this.setState({ search: search })}
             style={{ flex: 1, padding: 0 }}
           />
-          <Image source={this.state.icons.searchIcon.uri} style={{ height: 25, width: 25 }} />
+          <TouchableOpacity activeOpacity={.5} onPress={this.findLocation}>
+            <Image source={this.state.icons.searchIcon.uri} style={{ height: 25, width: 25 }} />
+          </TouchableOpacity>
         </View>
         <ScrollView
           horizontal
