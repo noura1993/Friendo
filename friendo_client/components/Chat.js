@@ -7,6 +7,7 @@ class Chat extends Component {
         super(props);
 
         this.state = {
+            intervalId: null,
             messages: [
                 // {
                 //     text: 'Hello developer',
@@ -47,8 +48,15 @@ class Chat extends Component {
         this.updateMessages();
 
         // TODO: Handle this properly
-        setInterval(() => this.updateMessages(), 500);
+        const intervalId = setInterval(() => this.updateMessages(), 500);
+        this.setState({ intervalId: intervalId});
     }
+
+    componentWillUnmount() {
+        if (this.state.intervalId) {
+            clearInterval(this.state.intervalId);
+        }
+      }
 
     onSend(messages) {
         fetch(ApiUrl('messages/'), {
