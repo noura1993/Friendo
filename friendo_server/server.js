@@ -91,6 +91,16 @@ app.post("/messages", (req, res) => {
     })
 })
 
+app.get("/user/:email", (req, res) => {
+  pool.query("SELECT * From users WHERE lower(email) = $1;", [req.params.email.toLowerCase()], (err, sqlRes) => {
+    if (err) {
+      res.json({ error: err });
+    } else {
+      res.json(sqlRes.rows);
+    }
+  })
+})
+
 app.get("/messages/:senderEmail/:receiverEmail", (req, res) => {
   const chatKey = req.params.senderEmail < req.params.receiverEmail ? req.params.senderEmail + '_' + req.params.receiverEmail : req.params.receiverEmail + '_' + req.params.senderEmail;
   pool.query("SELECT * FROM messages WHERE chatKey = $1 ORDER BY timestamp DESC, id DESC;", [chatKey], (err, sqlRes) => {
@@ -109,7 +119,8 @@ app.get("/friends/:id", (req, res) => {
   firstUser.email AS user_email,
   secondUser.firstName AS friend_first_name, 
   secondUser.lastName AS friend_last_name, 
-  secondUser.email AS friend_email
+  secondUser.email AS friend_email,
+  secondUser.picture AS friend_picture
   FROM friends 
   INNER JOIN users AS firstUser
   ON firstUser.id = userId
@@ -141,7 +152,7 @@ app.delete("/friends/:id", (req, res) => {
     if (err) {
       res.json({ error: err });
     } else {
-      res.json(sqlRes.rows);
+      res.json("ok");
     }
   })
 });

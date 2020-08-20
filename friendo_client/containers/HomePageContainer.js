@@ -6,14 +6,12 @@ import Friends from '../components/Friends';
 
 const Tab = createBottomTabNavigator();
 
-const HomePageContainer = (homePageContainerProps) => {
+const HomePageContainer = (props) => {
   return (
     <NavigationContainer independent={true}>
       <Tab.Navigator initialRouteName="Home" >
-        <Tab.Screen name="Home" >
-          {props => (<Home {...props} usersList={homePageContainerProps.usersList}/>)}
-          </Tab.Screen>
-        <Tab.Screen name="Friends" component={Friends} />
+        <Tab.Screen name="Home" children={() => <Home {...props} tabProps={props.route.params} usersList={props.usersList} /> } />
+        <Tab.Screen name="Friends" children={() => <Friends {...props} tabProps={props.route.params} /> } />
       </Tab.Navigator>
     </NavigationContainer>
   );

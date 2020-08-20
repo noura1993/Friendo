@@ -70,7 +70,10 @@ INSERT INTO interests (name) VALUES ('Chess');
 
 INSERT INTO friends (userId, friendId) VALUES (1, 2);
 INSERT INTO friends (userId, friendId) VALUES (1, 3);
+INSERT INTO friends (userId, friendId) VALUES (2, 1);
+INSERT INTO friends (userId, friendId) VALUES (3, 1);
 INSERT INTO friends (userId, friendId) VALUES (2, 4);
+INSERT INTO friends (userId, friendId) VALUES (4, 2);
 
 
 
