@@ -5,14 +5,14 @@ import MapView, { Marker, Animated as AnimatedRegion } from 'react-native-maps';
 
 
 const { width, height } = Dimensions.get("window");
-const CARD_HEIGHT = height * 0.5;
-const CARD_WIDTH = width * 0.8;
+const CARD_HEIGHT = height * 0.2;
+const CARD_WIDTH = width * 0.6;
 
 class FriendsCards extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userId: 0,
+            userId: 1,
             currentFriendsIds: [],
             intervalId: null
         }
@@ -24,7 +24,7 @@ class FriendsCards extends Component {
         this.updateFriends();
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.updateFriends();
 
         const intervalId = setInterval(() => this.updateFriends(), 500);
@@ -110,12 +110,12 @@ const styles = StyleSheet.create({
         // marginVertical:-100,
         flex: 2,
 
-        height: 500,
+        height: CARD_HEIGHT + 100,
         width: CARD_WIDTH
     },
     cardImage: {
-        width: 332,
-        height: 332,
+        width: CARD_WIDTH,
+        height: CARD_HEIGHT,
         alignSelf: "center",
         zIndex: 0,
         // position: "absolute",
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         width: 120,
         height: 40,
         marginHorizontal: 10,
-        marginVertical: 280,
+        marginVertical: 130,
         paddingVertical: 11,
         paddingHorizontal: 22,
         borderRadius: 10,

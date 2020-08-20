@@ -6,8 +6,8 @@ import FriendsCards from './FriendsCards';
 
 
 const { width, height } = Dimensions.get("window");
-const CARD_HEIGHT = height * 0.5;
-const CARD_WIDTH = width * 0.8;
+const CARD_HEIGHT = height * 0.2;
+const CARD_WIDTH = width * 0.6;
 
 class Home extends Component {
   constructor(props) {
@@ -121,9 +121,9 @@ class Home extends Component {
 
 
           style={styles.scrollView}
-          contentOffset={{ x: 0, y: -150 }}
+          contentOffset={{ x: 0, y: -70 }}
           contentInset={{
-            top: 150,
+            top: 70,
             left: 0,
             bottom: 0,
             right: 25
