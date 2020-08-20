@@ -51,18 +51,17 @@ class WelcomePageContainer extends Component {
 
 const styles = StyleSheet.create({
   logo: {
-    // margin: '16%',
-    // marginLeft: '19%',
+    top: 100,
     width: '58%', 
     flex:1,
     zIndex:1,
     alignSelf: "center",
   },
   logoName: {
+    top: 100,
     color: 'white',
     fontSize: 40,
     alignSelf: "center",
-    marginTop: 1,
     fontWeight: 'bold'
   },
   welcomePageContainer: {
@@ -72,7 +71,8 @@ const styles = StyleSheet.create({
     marginBottom: '50%'
   },
   buttonExtraStyle: {
-    width: '30%'
+    width: '30%',
+    top: 50
   },
   linearGradient: {
     flex: 1
