@@ -35,7 +35,7 @@ class Friends extends Component {
 
           }
         })
-        this.setState({ friends: friends});
+        this.setState({ friends: friends });
       })
       .catch((error) => console.error(error))
   }
@@ -52,14 +52,14 @@ class Friends extends Component {
   removeFriend(friendshipId) {
     fetch(ApiUrl('friends/' + friendshipId), {
       method: 'DELETE'
-  }).then(() => this.updateFriends())
-    .catch((error) => console.error(error))
+    }).then(() => this.updateFriends())
+      .catch((error) => console.error(error))
   }
 
   render() {
     return (
       <View style={styles.friends}>
-        {this.state.friends.map( (friend, index) => (
+        {this.state.friends.map((friend, index) => (
           <View key={index}>
             <Image source={friend.friendIcon} style={{ height: 10, width: 10 }} />
             <Text>{friend.friendName}</Text>
