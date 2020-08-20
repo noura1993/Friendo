@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ApiUrl } from '../ApiUrl'
 import { Text, View, StyleSheet, Image, TextInput, ScrollView, TouchableOpacity, Dimensions, Animated } from 'react-native';
 import MapView, { Marker, Animated as AnimatedRegion } from 'react-native-maps';
 
@@ -38,10 +39,24 @@ class Home extends Component {
     }
 
     this.onRegionChange = this.onRegionChange.bind(this);
+    this.addFriendship = this.addFriendship.bind(this);
   }
 
   onRegionChange(region) {
     this.state.region.setValue(region);
+  }
+
+  addFriendship(friendId) {
+    fetch(ApiUrl('friends'), {
+      method: 'POST',
+      body: JSON.stringify({
+          userId: this.state.userInfo.userId,
+          friendId: friendId
+      }),
+      headers: {
+          'Content-Type': 'application/json'
+      }
+    })
   }
 
 
@@ -118,7 +133,7 @@ class Home extends Component {
             
           {this.props.usersList.map((marker, index) => (
             <View style={styles.card} key={index}>
-              <TouchableOpacity style={styles.chatButton}>
+              <TouchableOpacity style={styles.chatButton} onPress={() => this.addFriendship(marker.id)}>
                 <Text>Add Friend</Text>
               </TouchableOpacity>
               <Image
