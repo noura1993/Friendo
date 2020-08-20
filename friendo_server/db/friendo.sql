@@ -15,7 +15,8 @@ CREATE TABLE users (
   longitude decimal,
   latitude decimal,
   age VARCHAR(255) NOT NULL,
-  picture VARCHAR(255) NOT NULL 
+  picture VARCHAR(255) NOT NULL,
+  bio VARCHAR(255) NOT NULL 
 );
 
 CREATE TABLE messages (
@@ -47,11 +48,16 @@ CREATE TABLE interests (
 );
 
 
-INSERT INTO users (firstName, lastName, email, password, gender, address, longitude, latitude, age, picture ) VALUES ('John', 'Cook', 'john@cook.com', 'asdf', 'Male', 'Edinburgh', '55.953251', '-3.188267', '18-25', 'https://api.adorable.io/avatars/127/John.png');
-INSERT INTO users (firstName, lastName, email, password, gender, address, longitude, latitude, age, picture ) VALUES ('James', 'Fraser', 'james@fraser.com', 'asdf', 'Male', 'Edinburgh', '55.963251', '-3.158267', '18-25', 'https://api.adorable.io/avatars/127/James.png');
-INSERT INTO users (firstName, lastName, email, password, gender, address, longitude, latitude, age, picture ) VALUES ('Alex', 'Jones', 'alex@jones.com', 'asdf', 'Female', 'Edinburgh', '55.973251', '-3.168267', '18-25', 'https://api.adorable.io/avatars/127/Alex.png');
-INSERT INTO users (firstName, lastName, email, password, gender, address, longitude, latitude, age, picture ) VALUES ('Robin', 'Hood', 'robin@hood.com', 'asdf', 'Female', 'Edinburgh', '55.963251', '-3.188267', '18-25', 'https://api.adorable.io/avatars/127/Robin.png');
+-- INSERT INTO users (firstName, lastName, email, password, gender, address, longitude, latitude, age, picture ) VALUES ('John', 'Cook', 'john@cook.com', 'asdf', 'Male', 'Edinburgh', '55.953251', '-3.188267', '18-25', 'https://api.adorable.io/avatars/127/John.png');
+-- INSERT INTO users (firstName, lastName, email, password, gender, address, longitude, latitude, age, picture ) VALUES ('James', 'Fraser', 'james@fraser.com', 'asdf', 'Male', 'Edinburgh', '55.963251', '-3.158267', '18-25', 'https://api.adorable.io/avatars/127/James.png');
+-- INSERT INTO users (firstName, lastName, email, password, gender, address, longitude, latitude, age, picture ) VALUES ('Alex', 'Jones', 'alex@jones.com', 'asdf', 'Female', 'Edinburgh', '55.973251', '-3.168267', '18-25', 'https://api.adorable.io/avatars/127/Alex.png');
+-- INSERT INTO users (firstName, lastName, email, password, gender, address, longitude, latitude, age, picture ) VALUES ('Robin', 'Hood', 'robin@hood.com', 'asdf', 'Female', 'Edinburgh', '55.963251', '-3.188267', '18-25', 'https://api.adorable.io/avatars/127/Robin.png');
 
+INSERT INTO users (firstName, lastName, email, password, gender, address, longitude, latitude, age, picture, bio ) VALUES ('Ronan', 'Huge-Mad', 'ronan@ronan.com', 'asdf', 'Male', 'Edinburgh', '55.953251', '-3.188267', '18-25', 'https://imgur.com/eEJ2MIl.jpg', 'Irish berserk');
+INSERT INTO users (firstName, lastName, email, password, gender, address, longitude, latitude, age, picture, bio ) VALUES ('Sara', 'Duck', 'sara@duck.com', 'asdf', 'Female', 'Edinburgh', '55.963251', '-3.158267', '18-25', 'https://imgur.com/zAZ3JJt.jpg', 'Swedish birdie');
+INSERT INTO users (firstName, lastName, email, password, gender, address, longitude, latitude, age, picture, bio ) VALUES ('Keith', 'Tatties', 'keith@tatties.com', 'asdf', 'Male', 'Edinburgh','55.973251', '-3.168267', '18-25', 'https://imgur.com/iWrsvyA.jpg', 'Mr Keith-tato');
+INSERT INTO users (firstName, lastName, email, password, gender, address, longitude, latitude, age, picture, bio ) VALUES ('Ahmend', 'Tooth', 'ahmend@tooth.com', 'asdf', 'Male','Edinburgh', '55.963251', '-3.188267', '18-25', 'https://imgur.com/0OtHobu.jpg', 'Mighty biter');
+INSERT INTO users (firstName, lastName, email, password, gender, address, longitude, latitude, age, picture, bio ) VALUES ('Craig', 'Gingerbeard', 'craig@gingerbeard.com', 'asdf', 'Male','Edinburgh', '55.98251', '-3.178267', '18-25', 'https://imgur.com/UU9853P.jpg', 'King of Hipsterland');
 
 INSERT INTO interests (name) VALUES ('Gaming');
 INSERT INTO interests (name) VALUES ('Programming');

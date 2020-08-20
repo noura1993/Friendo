@@ -101,9 +101,10 @@ class Home extends Component {
           style={styles.home}
           region={this.state.region}
         >
-          {this.state.markers.map((marker, index) => (
-            <Marker coordinate={marker.coordinate} key={index}>
-              <Image source={marker.image} style={{ height: 50, width: 50 }} />
+          {this.props.usersList.map((marker, index) => (
+            // console.log("YOYOWHATUP:", marker.latitude)
+            <Marker coordinate={{latitude: parseFloat(marker.longitude), longitude: parseFloat(marker.latitude)}} key={index}>
+              <Image source={{uri: marker.picture}} style={{ height: 50, width: 50, borderRadius:50 }} />
             </Marker>
           ))}
           <AnimatedRegion
@@ -171,12 +172,13 @@ class Home extends Component {
               </TouchableOpacity>
               <Image
                   source={{uri: marker.picture}}
-                style={{width: 332, height: 332}}
+                style={styles.cardImage}
                 resizeMode="cover"
               />
               <View style={styles.textContent}>
                 <Text>{marker.firstname}</Text>
                 <Text>{marker.lastname}</Text>
+                <Text>{marker.bio}</Text>
               </View>
             </View>
           ))}
@@ -249,22 +251,28 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
     marginHorizontal: 10,
-    
     // marginVertical:-100,
+    flex: 2,
     
-    height: CARD_HEIGHT,
+    height: 500,
     width: CARD_WIDTH
   },
   cardImage: {
-    width: "60%",
-    height: "60%",
+    width: 332,
+    height: 332,
     alignSelf: "center",
     zIndex: 0,
-    position: "absolute"
+    // position: "absolute",
+    borderRadius: 4,
+    // flex: 1
+   
   },
   textContent: {
     flex: 2,
-    padding: 10
+    padding: 10,
+    zIndex: 0,
+    position: "relative"
+
   },
   chatButton: {
     backgroundColor: 'rgba(255,255,255, 0.7)', 
