@@ -186,49 +186,6 @@ const styles = StyleSheet.create({
     width: 18,
     height: 18,
     marginRight: 5
-  },
-  card: {
-    backgroundColor: "#FFF",
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
-    borderBottomLeftRadius: 5,
-    borderBottomRightRadius: 5,
-    marginHorizontal: 10,
-    // marginVertical:-100,
-    flex: 2,
-
-    height: 500,
-    width: CARD_WIDTH
-  },
-  cardImage: {
-    width: 332,
-    height: 332,
-    alignSelf: "center",
-    zIndex: 0,
-    // position: "absolute",
-    borderRadius: 4,
-    // flex: 1
-
-  },
-  textContent: {
-    flex: 2,
-    padding: 10,
-    zIndex: 0,
-    position: "relative"
-  },
-  chatButton: {
-    backgroundColor: 'rgba(255,255,255, 0.7)',
-    width: 120,
-    height: 40,
-    marginHorizontal: 10,
-    marginVertical: 280,
-    paddingVertical: 11,
-    paddingHorizontal: 22,
-    borderRadius: 10,
-    zIndex: 1,
-    position: "absolute",
-    fontWeight: "700"
-
   }
 });
 export default Home;
