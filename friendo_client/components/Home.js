@@ -19,56 +19,6 @@ class Home extends Component {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       },
-      markers: [{
-        coordinate: {
-          latitude: 55.943251,
-          longitude: -3.188267
-        },
-        image: require("../assets/FriendoLogo2.png"),
-        name: "Jack Friendo",
-        age: "95+",
-        description: "I have the best mustache :p"
-      },
-      {
-        coordinate: {
-          latitude: 55.963251,
-          longitude: -3.158267
-        },
-        image: require("../assets/FriendoLogo2.png"),
-        name: "Craig Friendo",
-        age: "95+",
-        description: "I have the best Guitar :p"
-      },
-      {
-        coordinate: {
-          latitude: 55.973251,
-          longitude: -3.168267
-        },
-        image: require("../assets/FriendoLogo2.png"),
-        name: "Noura Friendo",
-        age: "95+",
-        description: "I have the best baloon :p"
-      },
-      {
-        coordinate: {
-          latitude: 55.963251,
-          longitude: -3.188267
-        },
-        image: require("../assets/FriendoLogo2.png"),
-        name: "Rumen Friendo",
-        age: "95+",
-        description: "I have the best beard :p"
-      },
-      {
-        coordinate: {
-          latitude: 55.953251,
-          longitude: -3.209267
-        },
-        image: require("../assets/FriendoLogo2.png"),
-        name: "Ed Friendo",
-        age: "95+",
-        description: "I have the best eyeglasses :p"
-      }],
       icons: {
         logo: {
           uri: require("../assets/FriendoLogo2.png")
