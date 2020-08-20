@@ -15,14 +15,10 @@ CREATE TABLE users (
   password VARCHAR(255) NOT NULL, /* ? */
   -- confirmPassword VARCHAR(255) NOT NULL,
   gender VARCHAR(255) NOT NULL,
-<<<<<<< HEAD
-  age INT,
   address TEXT,
   longitude decimal,
   latitude decimal,
-=======
   age VARCHAR(255) NOT NULL,
->>>>>>> ff0a4f31132d8c64a6d3846120a764f645d59949
   picture VARCHAR(255) NOT NULL /* BINARY, BYTEA ? */
 );
 
