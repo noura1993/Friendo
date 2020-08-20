@@ -10,6 +10,7 @@ const CARD_WIDTH = width * 0.8;
 class Home extends Component {
   constructor(props) {
     super(props);
+    console.log("props log", props);
     this.state = {
       region: {
         latitude: 55.953251,
@@ -163,17 +164,16 @@ class Home extends Component {
           
           >
             
-          {this.state.markers.map((marker, index) => (
+          {this.props.usersList.map((marker, index) => (
             <View style={styles.card} key={index}>
               <Image
-                source={marker.image}
-                style={styles.cardImage}
+                  source={{uri: marker.picture}}
+                style={{width: 332, height: 332}}
                 resizeMode="cover"
               />
               <View style={styles.textContent}>
-                <Text>{marker.name}</Text>
-                <Text>{marker.age}</Text>
-                <Text>{marker.description}</Text>
+                <Text>{marker.firstname}</Text>
+                <Text>{marker.lastname}</Text>
               </View>
             </View>
           ))}
