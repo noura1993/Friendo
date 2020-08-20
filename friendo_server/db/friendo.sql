@@ -1,7 +1,10 @@
 DROP TABLE IF EXISTS interests;
 -- DROP TABLE join_users_and_interests;
 -- DROP TABLE bookmark;
+DROP TABLE IF EXISTS friends;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS lastSeen;
 
 
 CREATE TABLE users (
@@ -14,6 +17,29 @@ CREATE TABLE users (
   gender VARCHAR(255) NOT NULL,
   age VARCHAR(255) NOT NULL,
   picture VARCHAR(255) NOT NULL /* BINARY, BYTEA ? */
+);
+
+CREATE TABLE messages (
+  id SERIAL PRIMARY KEY,
+  chatKey VARCHAR(255) NOT NULL,
+  senderEmail VARCHAR(255) NOT NULL,
+  receiverEmail VARCHAR(255) NOT NULL,
+  senderName VARCHAR(255) NOT NULL,
+  receiverName VARCHAR(255) NOT NULL,
+  body TEXT NOT NULL,
+  timestamp bigint NOT NULL 
+);
+
+CREATE TABLE lastSeen (
+  chatKey VARCHAR(255) NOT NULL,
+  userEmail VARCHAR(255) NOT NULL,
+  lastSeen bigint NOT NULL 
+);
+
+CREATE TABLE friends (
+  id SERIAL PRIMARY KEY,
+  userId INT references users(id),
+  friendId INT references users(id)
 );
 
 -- CREATE TABLE bookmark (
@@ -47,6 +73,13 @@ INSERT INTO interests (name) VALUES ('Dancing');
 INSERT INTO interests (name) VALUES ('Rock Climbing');
 INSERT INTO interests (name) VALUES ('Hiking');
 INSERT INTO interests (name) VALUES ('Chess');
+
+INSERT INTO friends (userId, friendId) VALUES (1, 2);
+INSERT INTO friends (userId, friendId) VALUES (1, 3);
+INSERT INTO friends (userId, friendId) VALUES (2, 4);
+
+
+
 
 
 
