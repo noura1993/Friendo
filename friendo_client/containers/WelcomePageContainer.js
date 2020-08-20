@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import FriendoButton from '../components/FriendoButton';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 class WelcomePageContainer extends Component {
@@ -29,6 +29,7 @@ class WelcomePageContainer extends Component {
             '#668cff',
             '#00cccc',
           ]}>
+            <Image source={require('../assets/friendotitle3.png')} style={styles.logo}/>
             <View style={styles.welcomePageContainer}> 
               <FriendoButton
                   text="Log In"
@@ -48,13 +49,25 @@ class WelcomePageContainer extends Component {
 }
 
 const styles = StyleSheet.create({
+  logo:{
+    margin: '16%',
+    marginLeft: '19%',
+    width: '100%', 
+    height: '5%',
+    flex:1,
+    zIndex:1,
+    alignSelf: "center",
+
+
+  },
   welcomePageContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: '50%'
   },
   buttonExtraStyle: {
-    width: '30%',
+    width: '30%'
   },
   linearGradient: {
     flex: 1
