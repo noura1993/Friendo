@@ -16,7 +16,7 @@ class WelcomePageContainer extends Component {
   }
 
   signupHideAndShow() {
-    this.props.navigation.navigate('SignUp');
+    this.props.navigation.navigate('AddressFinder');
   }
 
   render() {

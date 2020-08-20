@@ -15,6 +15,9 @@ CREATE TABLE users (
   password VARCHAR(255) NOT NULL, /* ? */
   gender VARCHAR(255) NOT NULL,
   age INT,
+  address TEXT,
+  longitude decimal,
+  latitude decimal,
   picture VARCHAR(255) NOT NULL /* BINARY, BYTEA ? */
 );
 

@@ -11,6 +11,7 @@ import HomePageContainer from './containers/HomePageContainer';
 import Profile from './components/Profile';
 import Chat from './components/Chat';
 import ChatTest from './components/ChatTest';
+import AddressFinder from './components/AddressFinder';
 
 const Stack = createStackNavigator();
 
@@ -48,6 +49,7 @@ const Friendo = () => {
       <Stack.Navigator initialRouteName="Friendo" >
         <Stack.Screen name="Friendo" component={WelcomePageContainer} />
         <Stack.Screen name="LogIn" component={LogIn} />
+        <Stack.Screen name="AddressFinder" component={AddressFinder} /> 
         <Stack.Screen name="SignUp" component={SignUp} /> 
         <Stack.Screen name="Profile" component={Profile} /> 
         <Stack.Screen name="ChatTest" component={ChatTest} /> 
