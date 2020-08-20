@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableHighlight } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { ApiUrl } from '../ApiUrl';
 
@@ -12,7 +12,25 @@ class Friends extends Component {
       userInfo: props.tabProps,
       userId: 0,
       intervalId: null,
-      friends: []
+      friends: [],
+      names: [
+        {
+          id: 0,
+          name: 'Ben',
+        },
+        {
+          id: 1,
+          name: 'Susan',
+        },
+        {
+          id: 2,
+          name: 'Robert',
+        },
+        {
+          id: 3,
+          name: 'Mary',
+        }
+      ]
     }
 
     this.updateFriends = this.updateFriends.bind(this);
@@ -23,12 +41,12 @@ class Friends extends Component {
   componentDidMount() {
     this.updateUserId();
     const intervalId = setInterval(() => this.updateFriends(), 500);
-    this.setState({ intervalId: intervalId});
+    this.setState({ intervalId: intervalId });
   }
 
   componentWillUnmount() {
     if (this.state.intervalId) {
-        clearInterval(this.state.intervalId);
+      clearInterval(this.state.intervalId);
     }
   }
 
@@ -51,7 +69,6 @@ class Friends extends Component {
             friendIcon: friend.friend_picture,
             friendName: friend.friend_first_name + ' ' + friend.friend_last_name,
             friendEmail: friend.friend_email,
-
           }
         })
         this.setState({ friends: friends });
@@ -77,29 +94,78 @@ class Friends extends Component {
 
   render() {
     return (
-      <View style={styles.friends}>
+      <>
         {this.state.friends.map((friend, index) => (
-          <View key={index}>
-            <Image source={friend.friendIcon} style={{ height: 10, width: 10 }} />
-            <Text>{friend.friendName}</Text>
-            <TouchableOpacity onPress={() => this.startChat(friend.friendEmail, friend.friendName)}>
-              <Text>Chat!</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.removeFriend(friend.friendshipId)}>
-              <Text>Remove!</Text>
-            </TouchableOpacity>
+          <View key={index} style={styles.container} >
+            <View style={styles.userImage}>
+            <Image style={styles.iconStyle} source={{ uri: friend.friendIcon}} ></Image> 
+            </View>
+            <View style={styles.user}>
+              <Text>{friend.friendName}</Text>
+            </View>
+            <View style={styles.buttons}>
+              <TouchableOpacity style={styles.chatButton} onPress={() => this.startChat(friend.friendEmail, friend.friendName)}>
+                <Text style={styles.text}>Chat</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.removeButton} onPress={() => this.removeFriend(friend.friendshipId)}>
+                <Text style={styles.text}>Remove</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         ))}
-      </View>
+      </>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  friends: {
-    flex: 1,
-    justifyContent: 'center',
+  chatButton: {
+    padding: 5,
+    paddingBottom: 5,
+    backgroundColor: '#00cccc',
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: 'white',
     alignItems: 'center',
+    width: 70,
+  },
+  removeButton: {
+    padding: 5,
+    paddingBottom: 5,
+    backgroundColor: '#ff4d4d',
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: 'white',
+    alignItems: 'center',
+    width: 70,
+  },
+  container: {
+    padding: 10,
+    marginTop: 3,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    flexDirection: 'row',
+    width: "100%"
+  },
+  userImage: {
+    width: "10%"
+  },
+  user: {
+    width: "50%"
+  },
+  buttons: {
+    width: "40%",
+    flexDirection: 'row',
+  },
+  text: {
+    color: '#fff'
+  },
+  iconStyle: {
+    width: 30,
+    height: 30,
+    marginRight: 5, 
+    resizeMode: "cover",
+    borderRadius: 50
   }
 });
 

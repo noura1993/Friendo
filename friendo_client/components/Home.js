@@ -128,15 +128,8 @@ class Home extends Component {
             bottom: 0,
             right: 25
           }}
-
         >
-
           <FriendsCards userId={this.state.userId} userInfo={this.state.userInfo} usersList={this.props.usersList}></FriendsCards>
-
-          {/* <TouchableOpacity style={{backgroundColor: '#000'}}>
-                <Text>Chat</Text>
-            </TouchableOpacity> */}
-
         </Animated.ScrollView>
       </>
     );

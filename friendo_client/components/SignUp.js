@@ -41,7 +41,7 @@ export default SignUp = (props) => {
     props.submitFunction(this._form.getValue());
 
     const formValues = this._form.getValue();
-    props.navigation.navigate('HomePageContainer', {
+    props.navigation.navigate('FriendoApp', {
       userFirstName: formValues.firstName,
       userLastName: formValues.lastName,
       userEmail: formValues.email,

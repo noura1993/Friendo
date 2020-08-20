@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   logo: {
     // margin: '16%',
     // marginLeft: '19%',
-    width: '56%', 
+    width: '58%', 
     flex:1,
     zIndex:1,
     alignSelf: "center",

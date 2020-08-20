@@ -30,7 +30,7 @@ class LogIn extends Component {
         if (json.length > 0) {
           const userInfo = json[0];
           if (userInfo.password === formData.password) {
-            this.props.navigation.navigate('HomePageContainer', {
+            this.props.navigation.navigate('FriendoApp', {
               userId: userInfo.id,
               userFirstName: userInfo.firstname,
               userLastName: userInfo.lastname,
