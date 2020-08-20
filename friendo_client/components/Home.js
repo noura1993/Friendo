@@ -48,19 +48,11 @@ class Home extends Component {
   }
 
   onRegionChange(region) {
-    this.state.region.setValue(region);
+    this.setState({ region: region });
   }
 
   componentDidMount() {
-    this.updateUserId();
-    const intervalId = setInterval(() => this.updateFriends(), 500);
-    this.setState({ intervalId: intervalId});
-  }
-
-  componentWillUnmount() {
-    if (this.state.intervalId) {
-        clearInterval(this.state.intervalId);
-    }
+    this.updateFriends();
   }
 
   updateUserId() {
@@ -86,15 +78,23 @@ class Home extends Component {
   }
 
   updateFriends() {
-    fetch(ApiUrl(`friends/${this.state.userId}`))
+    fetch(ApiUrl(`user/${this.state.userInfo.userEmail}`))
       .then((response) => response.json())
       .then((json) => {
-        const currentFriendsIds = json.map((friend) => {
-          return friend.friend_id
-        })
-        this.setState({ currentFriendsIds: currentFriendsIds });
+        this.setState({ userId: json[0].id });
       })
       .catch((error) => console.error(error))
+      .then(ignored => {
+        fetch(ApiUrl(`friends/${this.state.userId}`))
+          .then((response) => response.json())
+          .then((json) => {
+            const currentFriendsIds = json.map((friend) => {
+              return friend.friend_id
+            });
+            this.setState({ currentFriendsIds: currentFriendsIds });
+          })
+          .catch((error) => console.error(error))
+      })
   }
 
   render() {
@@ -103,6 +103,7 @@ class Home extends Component {
         <MapView
           style={styles.home}
           region={this.state.region}
+        // onRegionChange={this.onRegionChange}
         >
           {this.props.usersList.filter((marker) => marker.id != this.state.userId).map((marker, index) => (
             <Marker coordinate={{ latitude: parseFloat(marker.latitude), longitude: parseFloat(marker.longitude) }} key={index}>
@@ -110,8 +111,7 @@ class Home extends Component {
             </Marker>
           ))}
           <AnimatedRegion
-            region={this.state.region}
-            onRegionChange={this.onRegionChange}
+          // region={this.state.region}
           />
         </MapView>
         <View style={styles.searchBar}>
@@ -169,7 +169,7 @@ class Home extends Component {
 
           {this.props.usersList.filter((marker) => marker.id != this.state.userId).map((marker, index) => (
             <View style={styles.card} key={index}>
-              <TouchableOpacity style={[styles.chatButton, {backgroundColor: this.state.currentFriendsIds.includes(marker.id) ? "rgba(255,255,255, 0.7)" : "#668cff"}]} disabled={this.state.currentFriendsIds.includes(marker.id)} onPress={() => this.addFriendship(marker.id)}>
+              <TouchableOpacity style={[styles.chatButton, { backgroundColor: this.state.currentFriendsIds.includes(marker.id) ? "rgba(255,255,255, 0.7)" : "#668cff" }]} disabled={this.state.currentFriendsIds.includes(marker.id)} onPress={() => this.addFriendship(marker.id)}>
                 <Text>{this.state.currentFriendsIds.includes(marker.id) ? "Friend" : "Add Friend"}</Text>
               </TouchableOpacity>
               <Image

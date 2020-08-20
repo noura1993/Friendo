@@ -20,18 +20,18 @@ const Friendo = ({ navigation }) => {
   const [isLoading, setLoading] = useState(true);
   const [usersList, setUsersList] = useState([]);
   const [interests, setInterests] = useState([{}]);
-  
+
   accessAPI = (endpointName, setter) => {
     fetch(ApiUrl(endpointName))
-    .then((response) => response.json())
-    .then((json) => {
-      console.log(json);
-      setter(json)
-    })
-    .catch((error) => console.error(error))
-    .finally(() => setLoading(false))
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        setter(json)
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false))
   }
-  
+
   postAPI = (endpointName, data) => {
     const requestOptions = {
       method: 'POST',
@@ -39,67 +39,74 @@ const Friendo = ({ navigation }) => {
       body: JSON.stringify(data)
     };
     return fetch(ApiUrl(endpointName), requestOptions)
-    .then((response) => {
-      // console.log(response.text());
-      response.text();
-    })
-    // .then((json) => {
-    //   console.log(json);
-    //   return json
-    //   //setter(json)
-    // })
-    .catch((error) => console.error(error))
-//    .finally(() => setLoading(false))
+      .then((response) => {
+        // console.log(response.text());
+        response.text();
+      })
+      // .then((json) => {
+      //   console.log(json);
+      //   return json
+      //   //setter(json)
+      // })
+      .catch((error) => console.error(error))
+    //    .finally(() => setLoading(false))
   }
-  
+
   useEffect(() => {
     accessAPI('users', setUsersList)
     accessAPI('interests', setInterests)
   }, []);
-  
+
   styles = StyleSheet.create({
     tinyLogo: {
       width: 50,
       height: 50
     }
   });
-  
+
   signUpSubmit = (data) => {
     console.log("signing up with data:")
     console.log(data)
     postAPI("users/create", data).then(() => {
       navigate("Friendo")
     })
-    .catch(console.error);
+      .catch(console.error);
   }
-  
-  return ( 
+
+  return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Friendo" >
         <Stack.Screen name="Friendo" component={WelcomePageContainer} />
         <Stack.Screen name="LogIn" component={LogIn} />
-        <Stack.Screen name="AddressFinder" component={AddressFinder} /> 
+        <Stack.Screen name="AddressFinder" component={AddressFinder} />
         <Stack.Screen name="SignUp">
-          {props => <SignUp {...props} submitFunction={signUpSubmit} propTest="prop passing working"/>}
+          {props => <SignUp {...props} submitFunction={signUpSubmit} propTest="prop passing working" />}
         </Stack.Screen>
-        <Stack.Screen name="Profile" component={Profile} /> 
-        <Stack.Screen name="ChatTest" component={ChatTest} /> 
-        <Stack.Screen name="Chat" component={Chat} /> 
-        <Stack.Screen name="HomePageContainer"  
-          options={({ navigation }) => ({ 
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="ChatTest" component={ChatTest} />
+        <Stack.Screen name="Chat" component={Chat} />
+        <Stack.Screen name="HomePageContainer"
+          options={({ navigation }) => ({
             headerLeft: null,
             headerRight: () => (
               <Button
-                onPress={() => navigation.navigate('Profile')}
+                onPress={() => {
+                  navigation.navigate('Friendo');
+                  navigation.reset({
+                    index: 0,
+                    routes: [{ name: 'Friendo' }],
+                  });
+                }}
                 title="Sign out?"
-                color="#00cc00" /> 
-          )})}
+                color="#00cc00" />
+            )
+          })}
         >
-          {props => (<HomePageContainer {...props} usersList={usersList}/>)}
+          {props => (<HomePageContainer {...props} usersList={usersList} />)}
         </Stack.Screen>
-        </Stack.Navigator>
-        </NavigationContainer>
-        )
-      }
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
+}
 
 export default Friendo;
