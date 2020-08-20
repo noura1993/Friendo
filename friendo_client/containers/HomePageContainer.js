@@ -9,9 +9,9 @@ const Tab = createBottomTabNavigator();
 const HomePageContainer = (props) => {
   return (
     <NavigationContainer independent={true}>
-      <Tab.Navigator initialRouteName="HomePage" >
-        <Tab.Screen name="HomePage" children={() => <Home tabProps={props.route.params} /> } />
-        <Tab.Screen name="Friends" children={() => <Friends tabProps={props.route.params} /> } />
+      <Tab.Navigator initialRouteName="Home" >
+        <Tab.Screen name="Home" children={() => <Home {...props} tabProps={props.route.params} /> } />
+        <Tab.Screen name="Friends" children={() => <Friends {...props} tabProps={props.route.params} /> } />
       </Tab.Navigator>
     </NavigationContainer>
   );

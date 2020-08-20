@@ -85,7 +85,7 @@ const Friendo = ({ navigation }) => {
         <Stack.Screen name="Profile" component={Profile} /> 
         <Stack.Screen name="ChatTest" component={ChatTest} /> 
         <Stack.Screen name="Chat" component={Chat} /> 
-        <Stack.Screen name="Home" component={HomePageContainer} 
+        <Stack.Screen name="HomePageContainer" component={HomePageContainer} 
           options={({ navigation }) => ({ 
             headerLeft: null,
             headerRight: () => (

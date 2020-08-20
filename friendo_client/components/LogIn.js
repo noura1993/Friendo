@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { ApiUrl } from '../ApiUrl'
+import { ApiUrl } from '../ApiUrl';
 import t from 'tcomb-form-native';
 import FriendoButton from './FriendoButton';
 import LinearGradient from 'react-native-linear-gradient';
@@ -30,7 +30,7 @@ class LogIn extends Component {
         if (json.length > 0) {
           const userInfo = json[0];
           if (userInfo.password === formData.password) {
-            this.props.navigation.navigate('Home', {
+            this.props.navigation.navigate('HomePageContainer', {
               userId: userInfo.id,
               userFirstName: userInfo.firstname,
               userLastName: userInfo.lastname,
