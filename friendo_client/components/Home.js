@@ -103,7 +103,7 @@ class Home extends Component {
         >
           {this.props.usersList.map((marker, index) => (
             // console.log("YOYOWHATUP:", marker.latitude)
-            <Marker coordinate={{latitude: parseFloat(marker.longitude), longitude: parseFloat(marker.latitude)}} key={index}>
+            <Marker coordinate={{latitude: parseFloat(marker.latitude), longitude: parseFloat(marker.longitude)}} key={index}>
               <Image source={{uri: marker.picture}} style={{ height: 50, width: 50, borderRadius:50 }} />
             </Marker>
           ))}
