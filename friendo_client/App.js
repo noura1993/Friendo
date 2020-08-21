@@ -13,6 +13,9 @@ import { navigationRef, navigate } from './RootNavigation';
 import Chat from './components/Chat';
 import ChatTest from './components/ChatTest';
 import AddressFinder from './components/AddressFinder';
+import { YellowBox } from "react-native";
+
+YellowBox.ignoreWarnings([""]);
 
 const Stack = createStackNavigator();
 
