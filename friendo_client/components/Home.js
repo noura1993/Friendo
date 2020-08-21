@@ -19,8 +19,8 @@ class Home extends Component {
       usersList: [],
       currentFriendsIds: [],
       region: {
-        latitude: 55.953251,
-        longitude: -3.188267,
+        latitude: 55.9333525,
+        longitude: -3.1914842,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       },
@@ -50,7 +50,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.setState( {usersList: this.props.usersList});
+    this.getUsersByIntrest({interest: 'ALL'});
   }
 
   getUsersByIntrest(category) {
