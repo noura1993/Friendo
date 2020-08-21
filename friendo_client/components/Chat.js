@@ -8,16 +8,7 @@ class Chat extends Component {
 
         this.state = {
             intervalId: null,
-            messages: [
-                // {
-                //     text: 'Hello developer',
-                //     createdAt: 1597846591000,
-                //     user: {
-                //         _id: 2,
-                //         name: 'React Native'
-                //     }
-                // }
-            ]
+            messages: []
         };
 
         this.onSend = this.onSend.bind(this);

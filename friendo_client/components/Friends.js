@@ -82,7 +82,7 @@ class Friends extends Component {
     this.props.navigation.navigate('Chat', {
       senderEmail: this.state.userInfo.userEmail,
       receiverEmail: receiverEmail,
-      senderName: this.state.userInfo.userFirstName + ' ' + this.state.userInfo.userLasttName,
+      senderName: this.state.userInfo.userFirstName + ' ' + this.state.userInfo.userLastName,
       receiverName: receiverName,
     });
   }
