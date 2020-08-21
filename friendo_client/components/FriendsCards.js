@@ -28,7 +28,7 @@ class FriendsCards extends Component {
         this.updateFriends();
 
         const intervalId = setInterval(() => this.updateFriends(), 500);
-        this.setState({ intervalId: intervalId});
+        this.setState({ intervalId: intervalId });
     }
 
     componentWillUnmount() {
@@ -39,12 +39,14 @@ class FriendsCards extends Component {
 
     updateUserId() {
         return fetch(ApiUrl(`user/${this.props.userInfo.userEmail}`))
-          .then((response) => response.json())
-          .then((json) => {
-            this.setState({ userId: json[0].id });
-          })
-          .catch((error) => console.error(error))
-      }
+            .then((response) => response.json())
+            .then((json) => {
+                if (json.length > 0) {
+                    this.setState({ userId: json[0].id });
+                }
+            })
+            .catch((error) => console.error(error))
+    }
 
     addFriendship(friendId) {
         fetch(ApiUrl('friends'), {
@@ -73,14 +75,14 @@ class FriendsCards extends Component {
     updateFriends() {
         this.updateUserId().then(() => {
             fetch(ApiUrl(`friends/${this.state.userId}`))
-            .then((response) => response.json())
-            .then((json) => {
-                const currentFriendsIds = json.map((friend) => {
-                    return friend.friend_id
-                });
-                this.setState({ currentFriendsIds: currentFriendsIds });
-            })
-            .catch((error) => console.error(error))
+                .then((response) => response.json())
+                .then((json) => {
+                    const currentFriendsIds = json.map((friend) => {
+                        return friend.friend_id
+                    });
+                    this.setState({ currentFriendsIds: currentFriendsIds });
+                })
+                .catch((error) => console.error(error))
         })
     }
 

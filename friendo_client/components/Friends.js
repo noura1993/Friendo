@@ -54,7 +54,9 @@ class Friends extends Component {
     fetch(ApiUrl(`user/${this.state.userInfo.userEmail}`))
       .then((response) => response.json())
       .then((json) => {
-        this.setState({ userId: json[0].id });
+        if (json.length > 0) {
+          this.setState({ userId: json[0].id });
+        }
       })
       .catch((error) => console.error(error))
   }
