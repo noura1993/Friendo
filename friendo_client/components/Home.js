@@ -19,7 +19,7 @@ class Home extends Component {
       usersList: [],
       currentFriendsIds: [],
       region: {
-        latitude: 55.9333525,
+        latitude: 55.9203525,
         longitude: -3.1914842,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
