@@ -56,6 +56,17 @@ class FriendsCards extends Component {
             headers: {
                 'Content-Type': 'application/json'
             }
+        }).then(() => {
+            fetch(ApiUrl('friends'), {
+                method: 'POST',
+                body: JSON.stringify({
+                    userId: friendId,
+                    friendId: this.state.userId
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
         }).then(() => this.updateFriends())
     }
 
