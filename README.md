@@ -2,7 +2,7 @@
 
 [Watch a demo video](https://streamable.com/oj1xbx)
 
-[![Watch the video](https://imgur.com/a/i63TrF0)](https://streamable.com/oj1xbx)
+[![Watch the video](https://i.imgur.com/NMUY1oM.png)](https://streamable.com/oj1xbx)
 
 
 ## Want to learn
