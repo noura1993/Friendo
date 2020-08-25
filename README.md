@@ -1,5 +1,10 @@
 # Friendo
 
+[Watch a demo video](https://streamable.com/oj1xbx)
+
+[![Watch the video](https://imgur.com/a/i63TrF0)](https://streamable.com/oj1xbx)
+
+
 ## Want to learn
 
 We want to consolidate and learn the following technologies through making this project:
